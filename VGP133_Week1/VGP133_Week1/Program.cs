@@ -221,3 +221,135 @@
 //    }
 //}
 #endregion
+
+#region List
+//List<int> intList = new List<int>() { 1, 2, 3, 4, 5 };
+//List<float> floatList = new List<float>() { 1.1f, 2.2f, 3.3f };
+//List<string> stringList = new List<string>() { "Name1", "Name2", "Name3" };
+
+//intList.Add(6);
+//intList.Add(7);
+
+//intList = [.. intList, 8, 9];
+
+//intList.Remove(5); // Removes 5
+//intList.RemoveAt(5); // Removes Index 5
+//intList.RemoveRange(2, 3); // Removes starting index 2, remove 4
+//// Projection List: 1, 2, 8, 9
+
+//foreach (int i in intList[1..intList.Count]) // Goes through list starting index 1 to end
+//{
+//    Console.WriteLine(i);
+//}
+#endregion
+
+#region Exercise 3
+//float ReturnAvgGrade(List<int> list)
+//{
+//    int sum = 0;
+
+//    foreach (int grade in list)
+//    {
+//        sum += grade;
+//    }
+
+//    return (float)sum / (float)list.Count;
+//}
+
+//// 1
+//List<int> grades = new List<int> { 60, 70, 50, 40, 100, 90 };
+
+//Console.WriteLine(ReturnAvgGrade(grades));
+
+//// 2
+//grades = [.. grades, 95, 85, 75, 40];
+//grades.RemoveAt(0);
+
+//Console.WriteLine(ReturnAvgGrade(grades));
+
+//// 3
+//int lowestNum = grades[0];
+
+//foreach (int grade in grades[1..grades.Count])
+//{
+//    if (grade < lowestNum)
+//    {
+//        lowestNum = grade;
+//    }
+//}
+
+//grades.Remove(lowestNum);
+////grades.RemoveAll(lowestNum);
+
+//Console.WriteLine(ReturnAvgGrade(grades));
+
+//// 4
+//string stringInput = "";
+//List<string> stringList = new List<string>();
+
+//while (stringInput != "done")
+//{
+//    Console.Write("Input name: ");
+//    stringInput = Console.ReadLine();
+
+//    if (stringInput != "done")
+//    {
+//        stringList.Add(stringInput);
+//    }
+//}
+#endregion
+
+#region Functions
+//int a = 10;
+//int b = 20;
+//List<int> c = new List<int>() { 1, 2, 3 };
+
+
+//NotModified(a, b);
+//Modified(ref a, ref b);
+//NotModified(a, b);
+//ModifyList(c);
+
+//void NotModified(int num1, int num2)
+//{
+//    num1 += 30;
+//    num2 -= 30;
+
+//    Console.WriteLine(num1);
+//    Console.WriteLine(num2);
+//}
+
+//void Modified(ref int num1, ref int num2)
+//{
+//    num1 += 30;
+//    num2 -= 30;
+
+//    Console.WriteLine(num1);
+//    Console.WriteLine(num2);
+//}
+
+//void ModifyList(List<int> list)
+//{
+//    list[1] = 0;
+
+//    foreach (int i in list)
+//    {
+//        Console.Write($"{i} ");
+//    }
+//}
+#endregion
+
+#region Exercise 4
+//// 1
+//List<int> toAdd = new List<int>() { 1, 2, 3, 4, 5 };
+
+//Add100(toAdd);
+
+//void Add100(List<int> list)
+//{
+//    for (int i = 0; i < list.Count; i++)
+//    {
+//        list[i] += 100;
+//    }
+//}
+#endregion
