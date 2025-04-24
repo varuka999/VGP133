@@ -32,7 +32,7 @@
             }
             else
             {
-                Console.WriteLine($"{_name} was recently checked out!\n");
+                Console.WriteLine($"{_name} is not available, it was recently checked out!\n");
             }
         }
 

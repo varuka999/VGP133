@@ -11,11 +11,16 @@
             Console.WriteLine($"Rect1 Perimiter: {rectangle1.GetPerimeter()}");
             Console.WriteLine($"Rect2 Perimiter: {rectangle2.GetPerimeter()}");
             Console.WriteLine($"Rect3 Perimiter: {rectangle3.GetPerimeter()}");
+
             Console.WriteLine($"Rect1 Area: {rectangle1.GetArea()}");
             Console.WriteLine($"Rect2 Area: {rectangle2.GetArea()}");
             Console.WriteLine($"Rect3 Area: {rectangle3.GetArea()}");
+
+            Console.WriteLine("Rect1 Change Size");
             rectangle1.ChangeSize(4, 7);
+            Console.WriteLine("Rect2 Change Size");
             rectangle2.ChangeSize(-1, 3);
+            Console.WriteLine("Rect3 Change Size");
             rectangle3.ChangeSize(8, -5);
         }
 
@@ -40,6 +45,10 @@
             book2.Return();
             book3.Return();
             book3.Return();
+
+            book1.DisplayInfo();
+            book2.DisplayInfo();
+            book3.DisplayInfo();
 
             book1.Checkout();
             book2.Checkout();
@@ -80,21 +89,21 @@
             magician1.LearnSpell(spell1);
             magician1.ViewSpellBook();
 
+            magician1.UnlearnSpell(spell1);
+            magician1.UnlearnSpell(spell2);
+            magician1.ViewSpellBook();
+
             magician2.LearnSpell(spell1);
             magician2.LearnSpell(spell2);
+            magician2.ViewSpellBook();
+
+            magician2.UnlearnSpell(spell1);
+            magician2.UnlearnSpell(spell3);
             magician2.ViewSpellBook();
 
             magician3.LearnSpell(spell2);
             magician3.LearnSpell(spell3);
             magician3.ViewSpellBook();
-
-            magician1.UnlearnSpell(spell1);
-            magician1.UnlearnSpell(spell2);
-            magician1.ViewSpellBook();
-
-            magician2.UnlearnSpell(spell1);
-            magician2.UnlearnSpell(spell3);
-            magician2.ViewSpellBook();
 
             magician3.UnlearnSpell(spell1);
             magician3.UnlearnSpell(spell2);

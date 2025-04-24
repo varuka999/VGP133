@@ -5,7 +5,7 @@ namespace VGP133_A2_Karlsson_Vincent
     internal class Rectangle
     {
         private float _length;
-        private float _width;
+        private float _height;
 
         public float Length
         {
@@ -15,9 +15,9 @@ namespace VGP133_A2_Karlsson_Vincent
             }
             set
             {
-                if (value < 0)
+                if (value <= 0)
                 {
-                    Console.WriteLine("Length cannot be negative!");
+                    Console.WriteLine("Length cannot be 0 or negative!");
                 }
                 else
                 {
@@ -25,47 +25,47 @@ namespace VGP133_A2_Karlsson_Vincent
                 }
             }
         }
-        public float Width
+        public float Height
         {
             get
             {
-                return _width;
+                return _height;
             }
             set
             {
-                if (value < 0)
+                if (value <= 0)
                 {
-                    Console.WriteLine("Width cannot be negative!");
+                    Console.WriteLine("Height cannot be 0 or negative!");
                 }
                 else
                 {
-                    _width = value;
+                    _height = value;
                 }
             }
         }
 
-        public Rectangle(int length, int width)
+        public Rectangle(int length, int height)
         {
             Length = length;
-            Width = width;
+            Height = height;
         }
 
         public float GetPerimeter()
         {
-            return 2 * (_length + _width);
+            return 2 * (_length + _height);
         }
 
         public float GetArea()
         {
-            return (_width * _length);
+            return (_height * _length);
         }
 
-        public void ChangeSize(float length, float width)
+        public void ChangeSize(float length, float height)
         {
-            Console.WriteLine($"Old Length: {Length}\nOld Width: {Width}");
+            Console.WriteLine($"Old Length: {Length}\nOld Height: {Height}");
             Length = length;
-            Width = width;
-            Console.WriteLine($"New Length: {Length}\nNew Width: {Width}\n");
+            Height = height;
+            Console.WriteLine($"New Length: {Length}\nNew Height: {Height}\n");
         }
     }
 }

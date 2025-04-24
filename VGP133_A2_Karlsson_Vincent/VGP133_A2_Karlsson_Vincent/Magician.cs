@@ -14,7 +14,7 @@
             get { return _intelligence; }
             set
             {
-                if (value <= 0)
+                if (value < 0)
                 {
                     _intelligence = 0;
                 }
@@ -35,39 +35,42 @@
 
         public void LearnSpell(Spell spell)
         {
-            if (_spellBook.Contains(spell) == false)
+            Console.WriteLine($"{_name} is trying to learn {spell.SpellName}");
+            if (_spellBook.Contains(spell))
             {
-                Console.WriteLine($"{_name} learned {spell.SpellName}!");
-                _spellBook.Add(spell);
+                Console.WriteLine($"{_name} already knows {spell.SpellName}!\n");
             }
             else
             {
-                Console.WriteLine($"{_name} already knows {spell.SpellName}!");
+                Console.WriteLine($"{_name} learned {spell.SpellName}!\n");
+                _spellBook.Add(spell);
             }
         }
 
         public void UnlearnSpell(Spell spell)
         {
+            Console.WriteLine($"{_name} is trying to unlearn {spell.SpellName}");
             if (_spellBook.Contains(spell))
             {
-                Console.WriteLine($"{_name} unlearned {spell.SpellName}!");
+                Console.WriteLine($"{_name} unlearned {spell.SpellName}!\n");
                 _spellBook.Remove(spell);
             }
             else
             {
-                Console.WriteLine($"{_name} can't unlearn {spell.SpellName}!");
+                Console.WriteLine($"{_name} can't unlearn {spell.SpellName}! {_name} doesn't know that spell!\n");
             }
         }
 
         public void ViewSpellBook()
         {
+            Console.WriteLine($"Viewing {_name}'s spellbook...");
             if (_spellBook.Count == 0)
             {
-                Console.WriteLine($"{_name} spellbook is empty!\n");
+                Console.WriteLine($"{_name}'s spellbook is empty!\n");
                 return;
             }
 
-            Console.WriteLine($"{_name}'s spellBook:");
+            Console.WriteLine($"Spellbook:");
             foreach (Spell spell in _spellBook)
             {
                 Console.WriteLine(spell.SpellName);

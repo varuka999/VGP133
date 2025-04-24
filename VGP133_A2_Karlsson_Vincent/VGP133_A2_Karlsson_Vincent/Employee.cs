@@ -9,7 +9,10 @@
         public string Name { get { return _name; } set { _name = value; } }
         public int Age
         {
-            get { return _age; }
+            get
+            {
+                return _age;
+            }
             set
             {
                 _age = Math.Clamp(value, 18, 65);
@@ -30,7 +33,7 @@
                 else
                 {
                     _email = "guest@lcv.com";
-                    Console.WriteLine("Email enetered is invalid!\n");
+                    Console.WriteLine("Email entered is invalid!\n");
                 }
             }
         }

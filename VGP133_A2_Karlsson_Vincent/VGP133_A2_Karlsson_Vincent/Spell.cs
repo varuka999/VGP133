@@ -14,7 +14,7 @@
             get { return _spellPower; }
             set
             {
-                if (value <= 0)
+                if (value < 0)
                 {
                     _spellPower = 0;
                 }
@@ -29,7 +29,7 @@
             get { return _castTime; }
             set
             {
-                if (value <= 0)
+                if (value < 0)
                 {
                     _castTime = 0;
                 }
@@ -44,8 +44,8 @@
         {
             _spellName = spellName;
             _spellElement = spellElement;
-            _spellPower = spellPower;
-            _castTime = castTime;
+            SpellPower = spellPower;
+            CastTime = castTime;
         }
     }
 }

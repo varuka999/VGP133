@@ -2,12 +2,12 @@
 
 AssignmentQuestions assignmentQuestions = new AssignmentQuestions();
 
-assignmentQuestions.Question1();
+//assignmentQuestions.Question1();
 
-assignmentQuestions.Question2();
+//assignmentQuestions.Question2();
 
-assignmentQuestions.Question3();
+//assignmentQuestions.Question3();
 
-assignmentQuestions.Question4();
+//assignmentQuestions.Question4();
 
-assignmentQuestions.Question5();
+//assignmentQuestions.Question5();

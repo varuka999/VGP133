@@ -17,14 +17,28 @@ namespace VGP133_A2_Karlsson_Vincent
 
         public string MotorwayName { get { return _motorwayName; } }
         public char Direction { get { return _direction; } set { _direction = value; } }
-        public int LanesCount { get { return _lanesCount; } set { _lanesCount = value; } }
+        public int LanesCount
+        {
+            get { return _lanesCount; }
+            set
+            {
+                if (value <= 0)
+                {
+                    _lanesCount = 1;
+                }
+                else
+                {
+                    _lanesCount = value;
+                }
+            }
+        }
         public bool IsToll { get { return _isToll; } set { _isToll = value; } }
         public string MaintainerName { get { return s_maintainerName; } set { s_maintainerName = value; } }
 
         public Motorway(string motorwayName)
         {
             _motorwayName = motorwayName;
-            _lanesCount = 2;
+            LanesCount = 2;
             _isToll = false;
 
             s_maintainerName = "The Family";
@@ -34,7 +48,7 @@ namespace VGP133_A2_Karlsson_Vincent
         {
             _motorwayName = motorwayName;
             _direction = direction;
-            _lanesCount = lanesCount;
+            LanesCount = lanesCount;
             _isToll = isToll;
             s_maintainerName = maintainerName;
         }
@@ -45,13 +59,17 @@ namespace VGP133_A2_Karlsson_Vincent
 
             switch (_direction)
             {
-                case 'n': direction = "North ";
+                case 'n':
+                    direction = "North ";
                     break;
-                case 's': direction = "South ";
+                case 's':
+                    direction = "South ";
                     break;
-                case 'e': direction = "East ";
+                case 'e':
+                    direction = "East ";
                     break;
-                case 'w': direction = "West ";
+                case 'w':
+                    direction = "West ";
                     break;
                 default:
                     break;
