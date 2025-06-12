@@ -2,9 +2,16 @@
 {
     public class Equipment : Item
     {
-        public Equipment(ref Player player, string name, string description) : base(ref player, name, description)
-        {
+        public EquipmentType EquipmentType { get; protected set; }
+        public int HPBonus { get; private set; }
+        public int AttBonus { get; private set; }
+        public int DefBonus { get; private set; }
 
+        public Equipment(string name, int hpBonus, int attBonus, int defBonus) : base(name, "")
+        {
+            HPBonus = hpBonus;
+            AttBonus = attBonus;
+            DefBonus = defBonus;
         }
     }
 }

@@ -4,7 +4,7 @@
     {
         private event ConsumeDelegate OnHeal;
 
-        public HealthPotion(ref Player player, string name, string description, int modifier) : base(ref player, name, description, modifier)
+        public HealthPotion(ref Player player, string name, string description, int modifier) : base(name, description, modifier)
         {
             OnHeal += player.HealHealth;
             Description += $"Heals {_modifierAmount} health.";

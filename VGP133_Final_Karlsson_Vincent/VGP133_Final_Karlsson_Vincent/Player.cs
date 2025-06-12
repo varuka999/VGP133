@@ -24,6 +24,7 @@
         public Player(string name, string hairColor, char gender, int age, int maxHP, int attack, int defense) : base(name, maxHP, attack, defense)
         {
             HairColor = hairColor;
+            Type = UnitType.Player;
             Gender = gender;
             Age = age;
             _gold = 0;
@@ -80,13 +81,19 @@
             //}
         }
 
-        public void TakeDamage(ref Monster unit)
-        {
-            int damage = unit.Attack - Defense;
-            damage = Math.Max(damage, 1); // Ensures damage is at least 1
+        //public void TakeRefUnitDamage(ref Unit unit)
+        //{
+        //    int damage = unit.Attack - Defense;
+        //    damage = Math.Max(damage, 1); // Ensures damage is at least 1
 
-            Console.WriteLine($"{unit.Name} is attacking {Name} for {damage} damage ({Defense} blocked)!");
-            CurrentHP -= damage;
+        //    Console.WriteLine($"{unit.Name} is attacking {Name} for {damage} damage ({Defense} blocked)!");
+        //    CurrentHP -= damage;
+        //}
+
+        public override bool OnDeath()
+        {
+            Console.WriteLine($"PLAYER ({Name}) DIED");
+            return true;
         }
     }
 

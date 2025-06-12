@@ -4,7 +4,7 @@
     {
         protected int _modifierAmount;
 
-        public Consumable(ref Player player, string name, string description, int modifier) : base(ref player, name, description) 
+        public Consumable(string name, string description, int modifier) : base(name, description) 
         {
             _modifierAmount = modifier;
         }
@@ -14,5 +14,4 @@
             Console.WriteLine($"Consumed {Name}!");
         }
     }
-
 }

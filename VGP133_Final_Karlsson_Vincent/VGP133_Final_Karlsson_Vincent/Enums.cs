@@ -50,4 +50,19 @@
         Flee,
         Count,
     }
+
+    public enum UnitType
+    {
+        Null = 0,
+        Player,
+        Monster,
+        Boss,
+    }
+
+    public enum EquipmentType
+    {
+        Null = 0,
+        Weapon,
+        Armor,
+    }
 }

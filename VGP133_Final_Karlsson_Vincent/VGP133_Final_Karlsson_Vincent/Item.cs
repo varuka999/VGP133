@@ -2,14 +2,13 @@
 {
     public abstract class Item
     {
-        protected string _name;
-        protected string _description;
+        protected string _name = "";
+        protected string _description = "";
 
         public string Name { get => _name; protected set => _name = value; }
         public string Description { get => _description; protected set => _description = value; }
 
-
-        public Item(ref Player player, string name, string description)
+        public Item(string name, string description)
         {
             Name = name;
             Description = description;

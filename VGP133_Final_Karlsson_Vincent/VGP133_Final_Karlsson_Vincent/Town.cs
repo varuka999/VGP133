@@ -24,23 +24,13 @@
 
             switch (menuInput)
             {
-                case (int)MainMenu.Town:
+                case (int)TownMenu.Inn:
                     break;
-                case (int)MainMenu.Forest:
+                case (int)TownMenu.ConsumableShop:
                     break;
-                case (int)MainMenu.Mountains:
+                case (int)TownMenu.EquipmentShop:
                     break;
-                case (int)MainMenu.BossCastle:
-                    break;
-                case (int)MainMenu.Inventory:
-                    break;
-                case (int)MainMenu.Equipment:
-                    break;
-                case (int)MainMenu.Save:
-                    break;
-                case (int)MainMenu.Load:
-                    break;
-                case (int)MainMenu.Exit:
+                case (int)TownMenu.Character:
                     break;
                 default:
                     break;
