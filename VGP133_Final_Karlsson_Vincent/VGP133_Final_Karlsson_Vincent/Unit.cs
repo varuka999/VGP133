@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace VGP133_Final_Karlsson_Vincent
 {
@@ -12,8 +13,8 @@ namespace VGP133_Final_Karlsson_Vincent
         protected int _attack;
         protected int _defense;
 
-        protected Equipment _equippedWeapon;
-        protected Equipment _equippedArmor;
+        protected Weapon _equippedWeapon = null;
+        protected Armor _equippedArmor = null;
 
         protected List<Item> _inventory = new List<Item>();
 
@@ -21,10 +22,12 @@ namespace VGP133_Final_Karlsson_Vincent
 
         public string Name { get => _name; protected set => _name = value; }
         public UnitType Type { get => _unitType; protected set => _unitType = value; }
-        public int MaxHP { get => _maxHP; protected set => _maxHP = value > 0 ? value : 1; } // MaxHP can't be set to 0 or less
-        public int CurrentHP { get => _currentHP; protected set => _currentHP = value > MaxHP ? MaxHP : value < 0 ? 0 : value; } // CurrentHP can't exceed maxHP or be less than 0
-        public int Attack { get => _attack; protected set => _attack = value >= 0 ? value : 0; } // Attack can't be set less than 0
-        public int Defense { get => _defense; protected set => _defense = value >= 0 ? value : 0; } // Attack can't be set less than 0
+        public int MaxHP { get => _maxHP; protected set => _maxHP = Math.Max(value, 1); } // MaxHP can't be set less than 1
+        public int CurrentHP { get => _currentHP; protected set => _currentHP = value > MaxHP ? MaxHP : value < 0 ? 0 : value; } // CurrentHP can't exceed maxHP or be less than 0 ------ VERIFY!!!!!!!!
+        public int Attack { get => _attack; protected set => _attack = Math.Max(value, 1); } // Attack can't be set less than 1
+        public int Defense { get => _defense; protected set => _defense = Math.Max(value, 1); } // Attack can't be set less than 1
+        public Weapon EquippedWeapon { get => _equippedWeapon; }
+        public Armor EquippedArmor { get => _equippedArmor; }
 
         public Unit(string name, int maxHP, int attack, int defense)
         {
@@ -37,12 +40,12 @@ namespace VGP133_Final_Karlsson_Vincent
 
         public void AddConsumableToInventory(Consumable item)
         {
-            //if (_inventory.c
-            //{
-
-            //}
-
             _inventory.Add(item);
+        }
+        public virtual void AttackF(Unit unit)
+        {
+            Console.WriteLine($"{unit.Name} is attacking {Name}!");
+            TakeUnitDamage(unit);
         }
 
         public virtual void TakeRefUnitDamage<T>(ref T unit) where T : Unit // Generic typing allows ref to derived class when ref base class expected. Research further
@@ -56,50 +59,74 @@ namespace VGP133_Final_Karlsson_Vincent
 
         public virtual void TakeUnitDamage(Unit unit) // Creates a copy of the attacking unit.
         {
-            int damage = unit.Attack - Defense;
+            int attBonus = EquippedWeapon != null ? EquippedWeapon.AttBonus : 0;
+            int defBonus = EquippedArmor != null ? EquippedArmor.DefBonus : 0;
+
+            int damage = (unit.Attack + attBonus) - (Defense + defBonus);
             damage = Math.Max(damage, 1); // Ensures damage is at least 1
 
-            Console.WriteLine($"{unit.Name} is attacking {Name} for {damage} damage ({Defense} blocked)!");
             CurrentHP -= damage;
 
-            Console.WriteLine($"{Name} health remaining: {CurrentHP}");
-
-            //if (CurrentHP <= 0)
-            //{
-            //    // Unit based events
-            //    return true;
-            //}
-
-            //return false;
+            Console.WriteLine($"{Name} took {damage} damage ({Defense} blocked)!");
+            Console.WriteLine($"{Name} health remaining: {CurrentHP}\n");
         }
 
         public virtual void TakeDamage(int dmg)
         {
-            int damage = dmg - Defense;
+            int defBonus = EquippedArmor != null ? EquippedArmor.DefBonus : 0;
+            
+            int damage = dmg - (Defense + defBonus);
             damage = Math.Max(damage, 1); // Ensures damage is at least 1
 
             Console.WriteLine($"{Name} took {damage} damage ({Defense} blocked)!");
             CurrentHP -= damage;
         }
 
-        public Equipment EquipWeapon(Weapon weapon)
+        public Equipment EquipEquipment(Equipment equipment)
         {
-            if (weapon != null)
+            if (equipment != null)
             {
-                if (_equippedWeapon == null)
+                if (equipment.EquipmentType == EquipmentType.Weapon)
                 {
-                    EquipStatsUpdate(weapon);
-                    _equippedWeapon = weapon;
-                    return null;
-                }
-                else
-                {
-                    UnequipStatsUpdate(_equippedWeapon);
-                    EquipStatsUpdate(weapon);
+                    if (_equippedWeapon == null)
+                    {
+                        EquipStatsUpdate(equipment);
+                        _equippedWeapon = (Weapon)equipment;
 
-                    Weapon returnWeapon = _equippedWeapon;
-                    _equippedWeapon = weapon;
-                    return returnWeapon;
+                        return null;
+                    }
+                    else
+                    {
+                        UnequipStatsUpdate(_equippedWeapon);
+                        EquipStatsUpdate(equipment);
+                        Equipment returnEquipment = new Equipment(_equippedWeapon.Name, _equippedWeapon.HPBonus, _equippedWeapon.AttBonus, _equippedWeapon.DefBonus, _equippedWeapon.Cost);
+                        _equippedWeapon = (Weapon)equipment;
+
+                        return returnEquipment;
+                    }
+                }
+                else if (equipment.EquipmentType == EquipmentType.Armor)
+                {
+                    if (_equippedArmor == null)
+                    {
+                        EquipStatsUpdate(equipment);
+                        _equippedArmor = (Armor)equipment;
+
+                        return null;
+                    }
+                    else
+                    {
+                        UnequipStatsUpdate(_equippedArmor);
+                        EquipStatsUpdate(equipment);
+                        Equipment returnEquipment = new Equipment(_equippedArmor.Name, _equippedArmor.HPBonus, _equippedArmor.AttBonus, _equippedArmor.DefBonus, _equippedArmor.Cost);
+                        _equippedArmor = (Armor)equipment;
+
+                        return returnEquipment;
+                    }
+                }
+                else // Something went wrong!
+                {
+                    return null;
                 }
             }
             else
@@ -111,14 +138,14 @@ namespace VGP133_Final_Karlsson_Vincent
         protected void EquipStatsUpdate(Equipment equippedEquipment)
         {
             MaxHP += equippedEquipment.HPBonus;
-            Attack += equippedEquipment.AttBonus;
-            Defense += equippedEquipment.DefBonus;
+            //Attack += equippedEquipment.AttBonus;
+            //Defense += equippedEquipment.DefBonus;
         }
         protected void UnequipStatsUpdate(Equipment equippedEquipment)
         {
             MaxHP -= equippedEquipment.HPBonus;
             Attack -= equippedEquipment.AttBonus;
-            Defense -= equippedEquipment.DefBonus;
+            //Defense -= equippedEquipment.DefBonus;
         }
 
         public virtual bool OnDeath()

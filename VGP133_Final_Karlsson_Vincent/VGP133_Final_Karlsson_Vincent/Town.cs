@@ -2,23 +2,27 @@
 {
     public class Town
     {
-        public Town(ref Player player)
+        public void TownScene(ref Player player)
         {
             int menuInput = 0;
 
             Console.Clear();
-            Console.WriteLine("1 - Town\n2 - Forest\n3 - Mountains\n4 - Boss Castle\nGo To:");
+            for (int i = 1; i < (int)TownMenu.Count; i++)
+            {
+                Console.WriteLine($"{i} - {(TownMenu)Enum.GetValues(typeof(TownMenu)).GetValue(i)}");
+            }
+            //Console.WriteLine($"1 - {(TownMenu)Enum.GetValues(typeof(TownMenu)).GetValue(1)}\n2 - Consumable\n3 - Mountains\n4 - Boss Castle\nGo To:");
 
             while (menuInput == 0)
             {
                 while (Int32.TryParse(Console.ReadLine(), out menuInput) == false)
                 {
-                    Globals.ClearConsoleLine();
+                    Globals.ClearConsoleLines(1);
                 }
 
                 if (Globals.ValidateIntInput(ref menuInput, (int)MainMenu.Count) == false)
                 {
-                    Globals.ClearConsoleLine();
+                    Globals.ClearConsoleLines(1);
                 }
             }
 
@@ -26,9 +30,13 @@
             {
                 case (int)TownMenu.Inn:
                     break;
-                case (int)TownMenu.ConsumableShop:
+                case (int)TownMenu.Consumable:
+                    Shop consumableShopInstance = new Shop(ref player);
+                    consumableShopInstance.ShopMenu(ref player, TownMenu.Consumable);
                     break;
-                case (int)TownMenu.EquipmentShop:
+                case (int)TownMenu.Equipment:
+                    Shop equipmentShopInstance = new Shop(ref player);
+                    equipmentShopInstance.ShopMenu(ref player, TownMenu.Equipment);
                     break;
                 case (int)TownMenu.Character:
                     break;

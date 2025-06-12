@@ -6,9 +6,9 @@
         Town,
         Forest,
         Mountains,
-        BossCastle,
         Inventory,
         Equipment,
+        BossCastle,
         Save,
         Load,
         Exit,
@@ -19,8 +19,8 @@
     {
         Null = 0,
         Inn,
-        ConsumableShop,
-        EquipmentShop,
+        Consumable,
+        Equipment,
         Character,
         Count,
     }

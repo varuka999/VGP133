@@ -32,6 +32,8 @@ namespace VGP133_Final_Karlsson_Vincent
 
             while (units[0].CurrentHP > 0 && units.Count > 1)
             {
+
+
                 units[defendingIndex].TakeUnitDamage(units[attackingIndex]);
 
                 if (units[defendingIndex].CurrentHP <= 0) 

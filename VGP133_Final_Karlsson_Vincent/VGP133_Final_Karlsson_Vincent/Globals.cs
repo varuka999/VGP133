@@ -2,11 +2,14 @@
 {
     public static class Globals
     {
-        public static void ClearConsoleLine()
+        public static void ClearConsoleLines(int lines)
         {
-            Console.SetCursorPosition(0, Console.CursorTop - 1);
-            Console.Write(new string(' ', Console.BufferWidth));
-            Console.SetCursorPosition(0, Console.CursorTop);
+            for (int i = 0; i < lines; i++)
+            {
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                Console.Write(new string(' ', Console.BufferWidth));
+                Console.SetCursorPosition(0, Console.CursorTop);
+            }
         }
 
         public static bool ValidateIntInput(ref int input, int maxRangeExclusive)

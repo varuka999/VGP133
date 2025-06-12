@@ -4,7 +4,7 @@
     {
         protected int _modifierAmount;
 
-        public Consumable(string name, string description, int modifier) : base(name, description) 
+        public Consumable(string name, string description, int modifier, int cost) : base(name, description, cost) 
         {
             _modifierAmount = modifier;
         }
