@@ -9,7 +9,7 @@
             Console.Clear();
             for (int i = 1; i < (int)TownMenu.Count; i++)
             {
-                Console.WriteLine($"{i} - {(TownMenu)Enum.GetValues(typeof(TownMenu)).GetValue(i)}");
+                Console.WriteLine($"{i} - {(TownMenu?)Enum.GetValues(typeof(TownMenu)).GetValue(i)}");
             }
             //Console.WriteLine($"1 - {(TownMenu)Enum.GetValues(typeof(TownMenu)).GetValue(1)}\n2 - Consumable\n3 - Mountains\n4 - Boss Castle\nGo To:");
 

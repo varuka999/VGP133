@@ -20,6 +20,12 @@ namespace VGP133_Final_Karlsson_Vincent
         public void Test()
         {
             _player = new Player("TestPlayer", "Brown", 'M', 20, 100, 10, 3);
+
+            Weapon weaponTest = new Weapon("WTest1", 0, 5, 0, 5);
+            Armor armorTest = new Armor("ATest1", 5, 0, 5, 5);
+
+            _player.EquipEquipment(weaponTest);
+            _player.EquipEquipment(armorTest);
             //Monster enemy = new Monster(ref _player, "TestEnemy", false, 20, 5, 1, 5);
 
             //_player.TakeRefUnitDamage(ref enemy);
@@ -55,7 +61,7 @@ namespace VGP133_Final_Karlsson_Vincent
                 Console.Clear();
                 for (int i = 1; i < (int)MainMenu.Count; i++)
                 {
-                    Console.WriteLine($"{i} - {(MainMenu)Enum.GetValues(typeof(MainMenu)).GetValue(i)}");
+                    Console.WriteLine($"{i} - {(MainMenu?)Enum.GetValues(typeof(MainMenu)).GetValue(i)}");
                 }
                 //Console.WriteLine("1 - Town\n2 - Forest\n3 - Mountains\n4 - Boss Castle\nGo To:");
 

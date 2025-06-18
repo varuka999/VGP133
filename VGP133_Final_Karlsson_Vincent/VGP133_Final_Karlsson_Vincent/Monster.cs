@@ -35,18 +35,18 @@ namespace VGP133_Final_Karlsson_Vincent
         //    }
         //}
 
-        public override void TakeRefUnitDamage<T>(ref T unit)
-        {
-            base.TakeRefUnitDamage(ref unit);
+        //public override void TakeRefUnitDamage<T>(ref T unit)
+        //{
+        //    base.TakeRefUnitDamage(ref unit);
 
-            //if (CurrentHP <= 0)
-            //{
-            //    //unit.AddGold(_goldDropped);
-            //    // Invoke Dropped Gold
-            //    DroppedGold.Invoke(_goldDropped);
-            //    // Invoke List of items (loot)
-            //}
-        }
+        //    //if (CurrentHP <= 0)
+        //    //{
+        //    //    //unit.AddGold(_goldDropped);
+        //    //    // Invoke Dropped Gold
+        //    //    DroppedGold.Invoke(_goldDropped);
+        //    //    // Invoke List of items (loot)
+        //    //}
+        //}
 
         public override void TakeUnitDamage(Unit unit)
         {

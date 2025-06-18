@@ -24,17 +24,19 @@
 
         public void RunForest(ref Player player)
         {
+            Console.Clear();
+
             List<Unit> units = new List<Unit>();
             Random random = new Random();
 
             units.Add(player);
-            units.Add(monsterPool[random.Next(0, monsterPool.Count())]);
-
-            //units[0].TakeRefUnitDamage(ref player);
+            Monster tempMonster = new Monster(ref player, "", false, 0, 0, 0, 0);
+            tempMonster = monsterPool[random.Next(0, monsterPool.Count())];
+            units.Add(tempMonster);
 
             CombatManager combatInstance = new CombatManager();
 
-            if (combatInstance.Combat(ref units))
+            if (combatInstance.Combat(units))
             {
                 // Continue exploring forest prompt
                 Console.WriteLine("Continue exploring the forest?");
@@ -44,7 +46,7 @@
                 // Return to overworld
                 Console.WriteLine("Returning to overworld..");
             }
-
+            Console.ReadKey();
         }
     }
 }

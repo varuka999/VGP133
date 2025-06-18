@@ -17,13 +17,8 @@ namespace VGP133_Final_Karlsson_Vincent
         // Takes list of units, correctly distributes based on type
         // simulates battle
 
-        public bool Combat(ref List<Unit> units) // Returns true if player exited combat safely, to determine exit sequence in previous 'scenes'
+        public bool Combat(List<Unit> units) // Returns true if player exited combat safely, to determine exit sequence in previous 'scenes'
         {
-            // Imported List assumes correct ordering (units[0] is always the player)
-            //List<Unit> units = new List<Unit>();
-            //units.Add(player);
-            //units.Add(monster);
-
             Random random = new Random();
 
             //int turns = 1;
@@ -32,18 +27,17 @@ namespace VGP133_Final_Karlsson_Vincent
 
             while (units[0].CurrentHP > 0 && units.Count > 1)
             {
-
-
-                units[defendingIndex].TakeUnitDamage(units[attackingIndex]);
+                units[attackingIndex].AttackTarget(units[defendingIndex]);
 
                 if (units[defendingIndex].CurrentHP <= 0) 
                 {
-                    //units.RemoveAt(defendingIndex);
                     bool isPlayerDead = units[defendingIndex].OnDeath();
                     return !isPlayerDead;
                 }
 
-                // Swap attackers/defenders (temp for 1v1)
+                //Console.ReadKey();
+
+                // Swap attackers/defenders (1v1)
                 attackingIndex = 1 - attackingIndex;
                 defendingIndex = 1 - defendingIndex;
             }
