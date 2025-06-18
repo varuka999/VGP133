@@ -9,6 +9,11 @@
             _modifierAmount = modifier;
         }
 
+        public override bool Use(Unit user)
+        {
+            return false;
+        }
+
         public virtual void Consume()
         {
             Console.WriteLine($"Consumed {Name}!");

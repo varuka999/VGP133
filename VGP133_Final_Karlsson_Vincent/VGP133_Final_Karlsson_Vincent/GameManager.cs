@@ -79,7 +79,7 @@ namespace VGP133_Final_Karlsson_Vincent
                 {
                     case (int)MainMenu.Town:
                         Town town = new Town();
-                        town.TownScene(ref _player);
+                        town.TownScene(_player);
                         break;
                     case (int)MainMenu.Forest:
                         Forest forest = new Forest(_player);

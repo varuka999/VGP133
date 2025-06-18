@@ -2,20 +2,27 @@
 {
     public class HealthPotion : Consumable
     {
-        private event ConsumeDelegate OnHeal;
+        //private event ConsumeDelegate OnHeal;
 
-        public HealthPotion(ref Player player, string name, string description, int modifier, int cost) : base(name, description, modifier, cost)
+        public HealthPotion(Player player, string name, string description, int modifier, int cost) : base(name, description, modifier, cost)
         {
-            OnHeal += player.HealHealth;
+            //OnHeal += player.AdjustCurrentHP;
             Description += $"Heals {_modifierAmount} health.";
         }
 
-        public override void Consume()
+        public override bool Use(Unit user)
         {
-            OnHeal.Invoke(_modifierAmount);
-            base.Consume();
+            user.AdjustCurrentHP(_modifierAmount);
+            Console.WriteLine($"{user.Name} healed {_modifierAmount} health!");
+            return true;
         }
+
+        //public override void Consume()
+        //{
+        //    OnHeal.Invoke(_modifierAmount);
+        //    base.Consume();
+        //}
     }
 
-    delegate void ConsumeDelegate(int a);
+    //delegate void ConsumeDelegate(int a);
 }

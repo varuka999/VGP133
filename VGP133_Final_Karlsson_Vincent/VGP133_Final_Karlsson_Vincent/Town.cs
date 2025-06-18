@@ -2,7 +2,7 @@
 {
     public class Town
     {
-        public void TownScene(ref Player player)
+        public void TownScene(Player player)
         {
             int menuInput = 0;
 
@@ -31,12 +31,12 @@
                 case (int)TownMenu.Inn:
                     break;
                 case (int)TownMenu.Consumable:
-                    Shop consumableShopInstance = new Shop(ref player);
-                    consumableShopInstance.ShopMenu(ref player, TownMenu.Consumable);
+                    Shop consumableShopInstance = new Shop(player);
+                    consumableShopInstance.ShopMenu(player, TownMenu.Consumable);
                     break;
                 case (int)TownMenu.Equipment:
-                    Shop equipmentShopInstance = new Shop(ref player);
-                    equipmentShopInstance.ShopMenu(ref player, TownMenu.Equipment);
+                    Shop equipmentShopInstance = new Shop(player);
+                    equipmentShopInstance.ShopMenu(player, TownMenu.Equipment);
                     break;
                 case (int)TownMenu.Character:
                     break;

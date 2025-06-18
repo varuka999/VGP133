@@ -17,6 +17,12 @@
             _cost = cost;
         }
 
+        public virtual bool Use(Unit user)
+        {
+            Console.WriteLine($"{user.Name} used {Name}!");
+            return false;
+        }
+
         public bool Equals(Item other)
         {
             if (ReferenceEquals(this, other))
