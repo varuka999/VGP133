@@ -43,13 +43,13 @@ namespace VGP133_Final_Karlsson_Vincent
             _inventory.Add(item);
         }
 
-        public virtual void AttackTarget(Unit unit)
+        public virtual void AttackTarget(Unit target)
         {
             int damage = Attack + (EquippedWeapon?.AttBonus ?? 0);
             damage = Math.Max(damage, 1); // Technically doing the same check later but it might look weird to be 'attacking for negative dmg'.
 
-            Console.WriteLine($"{Name} is attacking {unit.Name} for {damage}!");
-            unit.TakeDamage(damage);
+            Console.WriteLine($"{Name} is attacking {target.Name} for {damage}!");
+            target.TakeDamage(damage);
         }
 
         //public virtual void TakeRefUnitDamage<T>(ref T unit) where T : Unit // Generic typing allows ref to derived class when ref base class expected. Research further

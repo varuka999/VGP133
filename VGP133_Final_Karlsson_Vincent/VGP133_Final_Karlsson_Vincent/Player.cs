@@ -10,7 +10,7 @@
         public string HairColor { get => _hairColor; protected set => _hairColor = value; }
         public char Gender { get => _gender; protected set => _gender = value; }
         public int Age { get => _age; protected set => _age = value >= 18 ? value : 18; } // Age can't be set less than 18
-        public int Gold { get => _gold; protected set => _gold += value; } // Always 'adds' gold, cannot set to a specific number
+        public int Gold { get => _gold; } // Always 'adds' gold, cannot set to a specific number
 
         public Player()
             : base("", 0, 0, 0)
@@ -27,12 +27,11 @@
             Type = UnitType.Player;
             Gender = gender;
             Age = age;
-            _gold = 0;
         }
 
-        public void AddGold(int gold)
+        public void AddGold(int amount)
         {
-            Gold = gold;
+            _gold = Math.Max(_gold + amount, 0);
         }
 
         public void HealHealth(int amount)

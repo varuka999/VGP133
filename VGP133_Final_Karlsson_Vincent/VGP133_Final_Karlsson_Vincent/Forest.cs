@@ -7,13 +7,13 @@
         // Player decides if they continue or go back to the overworld
         List<Monster> monsterPool = new List<Monster>();
 
-        public Forest(ref Player player)
+        public Forest(Player player)
         {
-            Monster enemy1 = new Monster(ref player, "TestForestMonster1", false, 20, 5, 1, 5);
-            Monster enemy2 = new Monster(ref player, "TestForestMonster2", false, 20, 5, 1, 5);
-            Monster enemy3 = new Monster(ref player, "TestForestMonster3", false, 20, 5, 1, 5);
-            Monster enemy4 = new Monster(ref player, "TestForestMonster4", false, 20, 5, 1, 5);
-            Monster enemy5 = new Monster(ref player, "TestForestMonster5", false, 20, 5, 1, 5);
+            Monster enemy1 = new Monster(player, "TestForestMonster1", false, 20, 5, 1, 5);
+            Monster enemy2 = new Monster(player, "TestForestMonster2", false, 20, 5, 1, 5);
+            Monster enemy3 = new Monster(player, "TestForestMonster3", false, 20, 5, 1, 5);
+            Monster enemy4 = new Monster(player, "TestForestMonster4", false, 20, 5, 1, 5);
+            Monster enemy5 = new Monster(player, "TestForestMonster5", false, 20, 5, 1, 5);
 
             monsterPool.Add(enemy1);
             monsterPool.Add(enemy2);
@@ -22,7 +22,7 @@
             monsterPool.Add(enemy5);
         }
 
-        public void RunForest(ref Player player)
+        public void RunForest(Player player)
         {
             Console.Clear();
 
@@ -30,7 +30,7 @@
             Random random = new Random();
 
             units.Add(player);
-            Monster tempMonster = new Monster(ref player, "", false, 0, 0, 0, 0);
+            Monster tempMonster = new Monster(player, "", false, 0, 0, 0, 0);
             tempMonster = monsterPool[random.Next(0, monsterPool.Count())];
             units.Add(tempMonster);
 

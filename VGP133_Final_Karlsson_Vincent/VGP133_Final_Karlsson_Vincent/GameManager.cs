@@ -4,22 +4,19 @@ namespace VGP133_Final_Karlsson_Vincent
 {
     public class GameManager
     {
-        private Player _player = null;
-        //private Town _town = null;
+        private Player _player;
 
         public GameManager()
         {
-            //_player = new Player("TestPlayer", "Brown", 'M', 20, 100, 100, 3);
-
+            //_player = new Player("TestPlayer", "Brown", 'M', 20, 100, 100, 3); // Player made here
+            _player = CreateCharacter();
             Test();
-
-            //_town = new Town(ref _player);
         }
 
         // Test
         public void Test()
         {
-            _player = new Player("TestPlayer", "Brown", 'M', 20, 100, 10, 3);
+            //_player = new Player("TestPlayer", "Brown", 'M', 20, 100, 10, 3);
 
             Weapon weaponTest = new Weapon("WTest1", 0, 5, 0, 5);
             Armor armorTest = new Armor("ATest1", 5, 0, 5, 5);
@@ -85,8 +82,8 @@ namespace VGP133_Final_Karlsson_Vincent
                         town.TownScene(ref _player);
                         break;
                     case (int)MainMenu.Forest:
-                        Forest forest = new Forest(ref _player);
-                        forest.RunForest(ref _player);
+                        Forest forest = new Forest(_player);
+                        forest.RunForest(_player);
                         break;
                     case (int)MainMenu.Mountains:
                         break;
@@ -109,6 +106,58 @@ namespace VGP133_Final_Karlsson_Vincent
             }
 
 
+        }
+
+        private Player CreateCharacter()
+        {
+            Console.WriteLine("---Character Creation---");
+
+            Console.Write("Enter name: ");
+            string name = Console.ReadLine()?.Trim() ?? "Unknown";
+
+            Console.Write("Enter hair color: ");
+            string hairColor = Console.ReadLine()?.Trim() ?? "Unknown";
+
+            char gender;
+            while (true)
+            {
+                Console.Write("Enter gender (M/F/O): ");
+                string genderInput = Console.ReadLine()?.Trim().ToUpper() ?? "U";
+                if ((genderInput[0] == 'M' || genderInput[0] == 'F' || genderInput[0] == 'O') || genderInput[0] == 'U')
+                {
+                    gender = genderInput[0];
+                    break;
+                }
+                Globals.ClearConsoleLines(2);
+                Console.WriteLine("Invalid Input! Please enter M, F, or O.\n");
+            }
+
+            int age;
+            while (true)
+            {
+                Console.Write("Enter your age (must be 18+): ");
+                string ageInput = Console.ReadLine()?.Trim() ?? "999";
+                if (int.TryParse(ageInput, out age) && age >= 18)
+                {
+                    break;
+                }
+                Globals.ClearConsoleLines(2);
+                Console.WriteLine("Invalid Input! Please enter an whole number 18 or higher.\n");
+            }
+
+            int baseHP = 100;
+            int baseAtt = 10;
+            int baseDef = 5;
+
+            Console.WriteLine("\n-Character created!-\n");
+            Console.WriteLine($"Name: {name}");
+            Console.WriteLine($"Hair Color: {hairColor}");
+            Console.WriteLine($"Gender: {gender}");
+            Console.WriteLine($"Age: {age}");
+            Console.WriteLine($"HP: {baseHP}, ATK: {baseAtt}, DEF: {baseDef}");
+            Console.WriteLine();
+
+            return new Player(name, hairColor, gender, age, baseHP, baseAtt, baseDef);
         }
     }
 }
