@@ -35,7 +35,9 @@ namespace VGP133_Final_Karlsson_Vincent
                         case PlayerAction.Flee:
                             if (units[defendingIndex].Type == UnitType.Boss)
                             {
+                                Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.WriteLine("Unable to flee form boss!");
+                                Console.ResetColor();
                                 Globals.Pause();
                                 continue;
                             }

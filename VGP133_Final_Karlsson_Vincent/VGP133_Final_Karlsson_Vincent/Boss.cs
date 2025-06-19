@@ -19,14 +19,18 @@ namespace VGP133_Final_Karlsson_Vincent
             }
             else
             {
-                base.AttackTarget(target);
+                int damage = Attack + (EquippedWeapon?.AttBonus ?? 0);
+                damage = Math.Max(damage, 1);
+
+                Console.WriteLine($"{Name} is attacking {target.Name} for {damage}!");
+                target.TakeDamage(damage);
             }
         }
 
         protected override void UseSpecial(Unit target)
         {
             Random random = new Random();
-            int rand = random.Next(0, 4);
+            int rand = random.Next(0, 3);
             if (rand == 0)
             {
                 Console.WriteLine($"{Name} buffed its attack and defense!");

@@ -2,7 +2,7 @@
 {
     internal class PebbleBeast : Monster
     {
-        public PebbleBeast(Player player, bool isBasic) : base(player, "Pebble Beast", false, isBasic ? 30 : 50, isBasic ? 6 : 12, isBasic ? 10 : 20, isBasic ? 30 : 55)
+        public PebbleBeast(Player player, bool isBasic) : base(player, "Pebble Beast", false, isBasic ? 30 : 50, isBasic ? 6 : 12, isBasic ? 7 : 15, isBasic ? 30 : 55)
         {
 
         }
