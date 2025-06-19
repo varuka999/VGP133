@@ -19,11 +19,19 @@ namespace VGP133_Final_Karlsson_Vincent
         {
             //_player = new Player("TestPlayer", "Brown", 'M', 20, 100, 10, 3);
 
-            Weapon weaponTest = new Weapon("WTest1", 0, 5, 0, 5);
-            Armor armorTest = new Armor("ATest1", 5, 0, 5, 5);
+            Weapon weaponTest = new Weapon("WTest1", 0, 5, 0, 10);
+            Armor armorTest = new Armor("ATest1", 5, 0, 5, 15);
+            HealthPotion potionTest = new HealthPotion("HPTest", 5, 5);
+            HealthPotion potionTest2 = new HealthPotion("HPTest", 5, 5);
 
-            _player.EquipEquipment(weaponTest);
-            _player.EquipEquipment(armorTest);
+            _player.AddItemToInventory(weaponTest);
+            _player.AddItemToInventory(armorTest);
+            _player.AddItemToInventory(potionTest);
+            _player.AddItemToInventory(potionTest2);
+            //_player.EquipEquipment(weaponTest);
+            //_player.EquipEquipment(armorTest);
+
+            _player.ShowInventoryMenu();
             //Monster enemy = new Monster(ref _player, "TestEnemy", false, 20, 5, 1, 5);
 
             //_player.TakeRefUnitDamage(ref enemy);

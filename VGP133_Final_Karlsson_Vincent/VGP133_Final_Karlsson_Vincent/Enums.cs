@@ -60,4 +60,21 @@
         Weapon,
         Armor,
     }
+
+    public enum InventorySortOption
+    {
+        Null = 0,
+        Default,
+        Name,
+        Quantity,
+        Type
+    }
+
+    public enum SortType
+    {
+        Null = 0,
+        Name,
+        TypeName,
+        Quantity,
+    }
 }

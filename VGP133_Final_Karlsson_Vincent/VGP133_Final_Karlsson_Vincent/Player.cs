@@ -61,6 +61,59 @@
         //    return false;
         //}
 
+        public void ShowInventoryMenu()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("--| Inventory Menu |--");
+                Console.WriteLine("Sort Options:");
+                Globals.PrintMenu<SortType>();
+                int menuInput = Globals.GetMenuChoice<SortType>();
+
+                SortType sortOption = (SortType)menuInput;
+                DisplayGroupedInventory(sortOption);
+                Globals.Pause();
+            }
+        }
+
+        private void DisplayGroupedInventory(SortType sortOption)
+        {
+            Console.Clear();
+            Console.WriteLine($"--| Inventory ({sortOption}) |--\n");
+
+            DisplayList(_inventory, sortOption);
+        }
+
+        public void DisplayList(List<Item> list, SortType sortType)
+        {
+            var grouped = from item in list
+                          group item by item.Name into groupedItems
+                          let itemType = groupedItems.First().GetType().BaseType?.Name ?? "Unknown" // It should never be unknown, but for safety
+                          select new { Name = groupedItems.Key, Count = groupedItems.Count(), TypeName = itemType };
+
+            switch (sortType)
+            {
+                case SortType.Name:
+                    grouped = grouped.OrderBy(item => item.Name);
+                    break;
+                case SortType.TypeName:
+                    grouped = grouped.OrderBy(item => item.TypeName).ThenBy(item => item.Name);
+                    break;
+                case SortType.Quantity:
+                    grouped = grouped.OrderByDescending(item => item.Count);
+                    break;
+                default:
+                    break;
+            }
+
+            Console.WriteLine("Inventory:");
+            foreach (var itemGroup in grouped)
+            {
+                Console.WriteLine($"{itemGroup.Name} ({itemGroup.TypeName}) x{itemGroup.Count}");
+            }
+        }
+
         public override bool OnDeath()
         {
             Console.WriteLine($"PLAYER ({Name}) DIED");
