@@ -13,12 +13,12 @@ namespace VGP133_Final_Karlsson_Vincent
 
             while (units[0].CurrentHP > 0 && units.Count > 1)
             {
-                UI.DisplayCombatScreen(units[0], units[1], location);
+                UI.DisplayCombatScreen(attackingIndex, units[0], units[1], location);
 
                 if (units[attackingIndex] is Player player) // If is Player class, declare 'player' as casted type
                 {
                     PlayerAction action = player.PlayerCombatActions();
-                    UI.DisplayCombatScreen(units[0], units[1], location);
+                    UI.DisplayCombatScreen(attackingIndex, units[0], units[1], location);
                     switch (action)
                     {
                         case PlayerAction.Attack:

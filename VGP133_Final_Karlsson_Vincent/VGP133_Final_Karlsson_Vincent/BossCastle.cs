@@ -28,14 +28,25 @@
             CombatManager combatInstance = new CombatManager();
             CombatResult result = combatInstance.Combat(units, "Boss Castle Room 1");
 
+            if (result == CombatResult.PlayerVictory)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nYou beat the monster! Onto the next room...");
+                Console.ResetColor();
+                Globals.Pause();
+            }
             if (result == CombatResult.PlayerFlee)
             {
-                Console.WriteLine("You fled the battle..");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\nYou fled the battle..");
+                Console.ResetColor();
                 return false;
             }
             else if (result == CombatResult.PlayerDefeat)
             {
-                Console.WriteLine("You were defeated...");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nYou were defeated...");
+                Console.ResetColor();
                 return false;
             }
 
@@ -50,14 +61,25 @@
             combatInstance = new CombatManager();
             result = combatInstance.Combat(units, "Boss Castle Room 2");
 
-            if (result == CombatResult.PlayerFlee)
+            if (result == CombatResult.PlayerVictory)
             {
-                Console.WriteLine("You fled the battle..");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nYou beat the monster! Onto the final battle..");
+                Console.ResetColor();
+                Globals.Pause();
+            }
+            else if (result == CombatResult.PlayerFlee)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\nYou fled the battle..");
+                Console.ResetColor();
                 return false;
             }
             else if (result == CombatResult.PlayerDefeat)
             {
-                Console.WriteLine("You were defeated...");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nYou were defeated...");
+                Console.ResetColor();
                 return false;
             }
 
@@ -73,12 +95,16 @@
 
             if (result == CombatResult.PlayerVictory)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\n---You defeated the boss! You beat the game!---\n");
+                Console.ResetColor();
                 return true;
             }
             else
             {
-                Console.WriteLine("You were defeated...");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nYou were defeated...");
+                Console.ResetColor();
                 return false;
             }
         }

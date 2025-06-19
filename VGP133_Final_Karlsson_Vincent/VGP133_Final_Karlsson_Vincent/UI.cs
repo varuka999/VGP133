@@ -38,7 +38,7 @@
             Console.WriteLine(CenterText(bottomLine, menuBarLine.Length));
         }
 
-        public static void DisplayCombatScreen(Unit player, Unit monster, string locationName)
+        public static void DisplayCombatScreen(int attacker, Unit player, Unit monster, string locationName)
         {
             string sceneLocation = $"-----{locationName}-----";
             string combatBarLine = ("═══════════════════  COMBAT  ═══════════════════");
@@ -47,7 +47,7 @@
             Console.WriteLine(menuBarLine);
             Console.WriteLine(CenterText(sceneLocation, combatBarLine.Length));
             Console.WriteLine($"     PLAYER{"",-26}ENEMY");
-            Console.WriteLine(" ────────────────             ────────────────");
+            Console.WriteLine(CenterText(" ────────────────             ────────────────", menuBarLine.Length));
 
             Console.WriteLine($" Name: {player.Name,-24}Name: {monster.Name}");
             Console.WriteLine($" HP  : {player.CurrentHP}/{player.MaxHP,-20}HP  : {monster.CurrentHP}/{monster.MaxHP}");
@@ -57,7 +57,19 @@
             Console.WriteLine($" Armor : {(player.EquippedArmor?.Name ?? "None"),-22}Armor : {(monster.EquippedArmor?.Name ?? "None")}");
             Console.WriteLine();
 
-            Console.WriteLine("═══════════════  Combat Log  ═══════════════");
+            Console.WriteLine(CenterText("═══════════════  Combat Log  ═══════════════", menuBarLine.Length));
+            if (attacker == 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(CenterText($"--{monster.Name} Turn--", menuBarLine.Length));
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(CenterText($"--{player.Name} Turn--", menuBarLine.Length));
+                Console.ResetColor();
+            }
         }
 
         public static string CenterText(string text, int totalWidth)

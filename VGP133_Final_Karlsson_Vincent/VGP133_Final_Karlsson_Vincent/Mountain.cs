@@ -40,13 +40,19 @@
                 switch (result)
                 {
                     case CombatResult.PlayerVictory:
-                        Console.WriteLine("You beat the monster!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\nYou beat the monster!");
+                        Console.ResetColor();
                         break;
                     case CombatResult.PlayerFlee:
-                        Console.WriteLine("You fled the battle..");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("\nYou fled the battle..");
+                        Console.ResetColor();
                         break;
                     case CombatResult.PlayerDefeat:
-                        Console.WriteLine("You were defeated...");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nYou were defeated...");
+                        Console.ResetColor();
                         break;
                 }
             }
