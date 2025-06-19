@@ -2,6 +2,14 @@
 
 namespace VGP133_Final_Karlsson_Vincent
 {
+    public enum GameStart
+    {
+        Null = 0,
+        NewGame,
+        Continue,
+        Exit,
+    }
+
     public enum MainMenu
     {
         Null = 0,
@@ -97,5 +105,33 @@ namespace VGP133_Final_Karlsson_Vincent
         PlayerVictory,
         PlayerFlee,
         PlayerDefeat,
+    }
+
+    public enum MonsterData
+    { 
+        Null = 0,
+        GoblinLooterA, GoblinLooterB,
+        ShaleGolemA, ShaleGolemB,
+        LargeLeechA, LargeLeechB,
+        RecklessOgreA, RecklessOgreB,
+        ClumsyOgreA, ClumsyOgreB,
+        PebbleBeastA, PebbleBeastB,
+    }
+
+    public enum ItemData
+    {
+        Null = 0,
+        HealthPotion,
+        AdvancedPotion,
+        SuperPotion,
+        Elixir,
+        IronSword,
+        SteelSword,
+        DamascusSword,
+        PiercingSword,
+        LeatherArmor,
+        ToughArmor,
+        SpikedArmor,
+        ChainMailArmor,
     }
 }

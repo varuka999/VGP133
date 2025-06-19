@@ -5,7 +5,8 @@
         public void TownScene(Player player)
         {
             Console.Clear();
-            Globals.PrintMenu<TownMenu>();
+            UI.RenderMenuHeader("Town of Cenfelt");
+            UI.PrintMenu<TownMenu>();
             int menuInput = Globals.GetMenuChoice<TownMenu>();
 
             switch ((TownMenu)menuInput)

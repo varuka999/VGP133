@@ -1,14 +1,14 @@
 ﻿namespace VGP133_Final_Karlsson_Vincent
 {
-    public class Forest
+    public class Mountain
     {
         private List<MonsterData> _monsterPoolNames;
         private List<ItemData> _itemPoolNames;
 
-        public Forest()
+        public Mountain()
         {
-            _monsterPoolNames = new List<MonsterData> { MonsterData.GoblinLooterA, MonsterData.ShaleGolemA, MonsterData.LargeLeechA, MonsterData.RecklessOgreA, MonsterData.ClumsyOgreA, MonsterData.PebbleBeastA};
-            _itemPoolNames = new List<ItemData> { ItemData.HealthPotion, ItemData.AdvancedPotion, ItemData.SuperPotion, ItemData.IronSword, ItemData.SteelSword, ItemData.LeatherArmor, ItemData.ToughArmor };
+            _monsterPoolNames = new List<MonsterData> { MonsterData.GoblinLooterB, MonsterData.ShaleGolemB, MonsterData.LargeLeechB, MonsterData.RecklessOgreB, MonsterData.ClumsyOgreB, MonsterData.PebbleBeastB };
+            _itemPoolNames = new List<ItemData> { ItemData.AdvancedPotion, ItemData.SuperPotion, ItemData.Elixir, ItemData.SteelSword, ItemData.DamascusSword, ItemData.PiercingSword, ItemData.ToughArmor, ItemData.SpikedArmor, ItemData.ChainMailArmor };
         }
 
         public void Run(Player player)
@@ -35,7 +35,7 @@
                 units.Add(enemy);
 
                 CombatManager combatInstance = new CombatManager();
-                CombatResult result = combatInstance.Combat(units, "Forest");
+                CombatResult result = combatInstance.Combat(units, "Mountain");
 
                 switch (result)
                 {

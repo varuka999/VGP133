@@ -110,8 +110,7 @@
 
         public void ShowInventoryMenu()
         {
-            Console.Clear();
-            Console.WriteLine("--| Inventory Menu |--");
+            UI.RenderMenuHeader("Inventory");
 
             if (_inventory.Count == 0)
             {
@@ -121,7 +120,7 @@
             }
 
             Console.WriteLine("Sort Options:");
-            Globals.PrintMenu<SortType>();
+            UI.PrintMenu<SortType>();
             int menuInput = Globals.GetMenuChoice<SortType>();
 
             SortType sortOption = (SortType)menuInput;
@@ -130,8 +129,7 @@
 
         public void ShowEquipmentMenu()
         {
-            Console.Clear();
-            Console.WriteLine("--| Equipment Menu |--");
+            UI.RenderMenuHeader("Equipments");
 
             var filteredForEquipment = (from item in _inventory
                                         where item is Equipment
@@ -212,8 +210,9 @@
 
         private void DisplaySortedGroupedInventory(SortType sortOption)
         {
-            Console.Clear();
-            Console.WriteLine($"--| Sorted by ({sortOption}) |--\n");
+            UI.RenderMenuHeader($"Sorted by ({sortOption})");
+            //Console.Clear();
+            //Console.WriteLine($"--| Sorted by ({sortOption}) |--\n");
 
             DisplayList(_inventory, sortOption);
         }
@@ -249,7 +248,7 @@
 
         public PlayerAction PlayerCombatActions()
         {
-            Globals.PrintMenu<PlayerAction>();
+            UI.PrintMenu<PlayerAction>();
             int playerAction = Globals.GetMenuChoice<PlayerAction>();
 
             return (PlayerAction)playerAction;

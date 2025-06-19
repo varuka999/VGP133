@@ -2,7 +2,7 @@
 {
     internal class GoblinLooter : Monster
     {
-        public GoblinLooter(Player player, bool isElite) : base(player, "Goblin Looter", false, isElite? 35 : 70, isElite ? 5 : 10, isElite ? 0 : 5, isElite ? 25 : 40)
+        public GoblinLooter(Player player, bool isBasic) : base(player, "Goblin Looter", false, isBasic? 35 : 70, isBasic ? 5 : 10, isBasic ? 0 : 5, isBasic ? 25 : 40)
         {
 
         }

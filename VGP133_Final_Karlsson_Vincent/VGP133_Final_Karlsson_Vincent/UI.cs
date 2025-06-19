@@ -2,43 +2,50 @@
 {
     internal class UI
     {
-        public static void DisplayCombatStatus(Unit player, Unit enemy)
+        static string menuBarLine = "═══════════════════════════════════════════════";
+        public static void RenderMenuHeader(string locationName)
         {
             Console.Clear();
-            Console.WriteLine("╔════════════════════════════════════════════════════════════════════════╗");
-            Console.WriteLine("║                                 COMBAT                                 ║");
-            Console.WriteLine("╚════════════════════════════════════════════════════════════════════════╝");
+            string gameTitle = "[ FANTASY ADVENTURE ]";
+            string sceneLocation = $"'{locationName}'";
+            Console.WriteLine(menuBarLine);
+            Console.WriteLine(CenterText(gameTitle, menuBarLine.Length));
+            Console.WriteLine(menuBarLine);
+            Console.WriteLine(CenterText(sceneLocation, menuBarLine.Length));
 
-            Console.WriteLine($"{"PLAYER",-35}{"ENEMY",35}");
-            Console.WriteLine("────────────────────────────────────────────────────────────────────────────");
-
-            Console.WriteLine($"{player.Name,-35}{enemy.Name,35}");
-
-            Console.WriteLine($"{($"HP: {player.CurrentHP}/{player.MaxHP}", -35)}{($"HP: {enemy.CurrentHP}/{enemy.MaxHP}", 35)}");
-            Console.WriteLine($"{($"ATK: {player.Attack}", -35)}{($"ATK: {enemy.Attack}", 35)}");
-            Console.WriteLine($"{($"DEF: {player.Defense}", -35)}{($"DEF: {enemy.Defense}", 35)}");
-
-            if (player.EquippedWeapon != null || enemy.EquippedWeapon != null)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"{($"Weapon: {player.EquippedWeapon?.Name ?? "None"}", -35)}{($"Weapon: {enemy.EquippedWeapon?.Name ?? "None"}", 35)}");
-            }
-
-            if (player.EquippedArmor != null || enemy.EquippedArmor != null)
-            {
-                Console.WriteLine($"{($"Armor: {player.EquippedArmor?.Name ?? "None"}", -35)}{($"Armor: {enemy.EquippedArmor?.Name ?? "None"}", 35)}");
-            }
-
-            Console.WriteLine("\n────────────────────────────────────────────────────────────────────────────\n");
+            Console.WriteLine("───────────────────────────────────────────────");
         }
 
-        public static void DisplayCombatScreen(Unit player, Unit monster)
+        public static void PrintMenu<T>() where T : Enum
         {
-            Console.Clear();
-            Console.WriteLine("═══════════════════  COMBAT  ═══════════════════");
-            Console.WriteLine();
+            var enumValues = Enum.GetValues(typeof(T)).Cast<T>().ToList();
 
-            // Left: Player | Right: Enemy
+            for (int i = 1; i < enumValues.Count; i++)
+            {
+                Console.WriteLine($"{i} - {enumValues[i]}");
+            }
+        }
+
+        public static void PlayerMenuBar(Player player)
+        {
+            string playerMenuBar = $"| {player.Name} | HP: {player.CurrentHP}/{player.MaxHP} | Gold: {player.Gold} |";
+            Console.WriteLine(CenterText(playerMenuBar, menuBarLine.Length));
+            string bottomLine = "";
+            for (int i = 0; i < playerMenuBar.Length; ++i)
+            {
+                bottomLine += "─";
+            }
+            Console.WriteLine(CenterText(bottomLine, menuBarLine.Length));
+        }
+
+        public static void DisplayCombatScreen(Unit player, Unit monster, string locationName)
+        {
+            string sceneLocation = $"-----{locationName}-----";
+            string combatBarLine = ("═══════════════════  COMBAT  ═══════════════════");
+
+            Console.Clear();
+            Console.WriteLine(menuBarLine);
+            Console.WriteLine(CenterText(sceneLocation, combatBarLine.Length));
             Console.WriteLine($"     PLAYER{"",-26}ENEMY");
             Console.WriteLine(" ────────────────             ────────────────");
 
@@ -51,22 +58,23 @@
             Console.WriteLine();
 
             Console.WriteLine("═══════════════  Combat Log  ═══════════════");
-            //foreach (var entry in log)
-            //    Console.WriteLine($"> {entry}");
-
-            //Console.WriteLine("\n═══════════════════════════════════════════════");
-            //Console.WriteLine(" Press any key to continue...");
-            //Console.ReadKey();
         }
 
-        public void DisplayUnitStatus(Unit unit, string label)
+        public static string CenterText(string text, int totalWidth)
         {
-            Console.WriteLine($" {label,-8} Name: {unit.Name}");
-            Console.WriteLine($" {"",-8} HP  : {unit.CurrentHP} / {unit.MaxHP}");
-            Console.WriteLine($" {"",-8} ATK : {unit.Attack}");
-            Console.WriteLine($" {"",-8} DEF : {unit.Defense}");
-            Console.WriteLine($" {"",-8} Weapon: {(unit.EquippedWeapon != null ? unit.EquippedWeapon.Name : "None")}");
-            Console.WriteLine($" {"",-8} Armor : {(unit.EquippedArmor != null ? unit.EquippedArmor.Name : "None")}");
+            if (string.IsNullOrEmpty(text) == true)
+            {
+                return "";
+            }
+
+            int padding = (totalWidth - text.Length) / 2;
+
+            if (padding < 0)
+            {
+                padding = 0;
+            }
+
+            return new string(' ', padding) + text;
         }
     }
 }

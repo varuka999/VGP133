@@ -2,7 +2,7 @@
 {
     internal class ClumsyOgre : Monster
     {
-        public ClumsyOgre(Player player, bool isElite) : base(player, "Clumsy Ogre", false, isElite ? 45 : 80, isElite ? 10 : 15, isElite ? 2 : 6, isElite ? 35 : 55)
+        public ClumsyOgre(Player player, bool isBasic) : base(player, "Clumsy Ogre", false, isBasic ? 45 : 80, isBasic ? 10 : 15, isBasic ? 2 : 6, isBasic ? 35 : 55)
         {
 
         }

@@ -34,9 +34,9 @@ namespace VGP133_Final_Karlsson_Vincent
 
             while (true)
             {
-                Console.Clear();
-                Globals.PlayerMenuBar(player);
-                Console.WriteLine($"{shopType.ToString()} Shop!");
+                UI.RenderMenuHeader($"{shopType.ToString()} Shop");
+                UI.PlayerMenuBar(player);
+                //Console.WriteLine($"{shopType.ToString()} Shop!");
                 for (int i = 0; i < shopItems.Count; i++)
                 {
                     Console.WriteLine($"{i + 1} - {shopItems[i].Name} ({shopItems[i].Cost}g)");

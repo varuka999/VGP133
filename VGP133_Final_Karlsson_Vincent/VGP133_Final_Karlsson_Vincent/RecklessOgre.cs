@@ -2,7 +2,7 @@
 {
     internal class RecklessOgre : Monster
     {
-        public RecklessOgre(Player player, bool isElite) : base(player, "Reckless Ogre", false, isElite ? 55 : 90, isElite ? 12 : 18, isElite ? 0 : 0, isElite ? 40 : 60)
+        public RecklessOgre(Player player, bool isBasic) : base(player, "Reckless Ogre", false, isBasic ? 55 : 90, isBasic ? 12 : 18, isBasic ? 0 : 0, isBasic ? 40 : 60)
         {
 
         }

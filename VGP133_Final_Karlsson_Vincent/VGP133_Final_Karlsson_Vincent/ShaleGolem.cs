@@ -2,7 +2,7 @@
 {
     internal class ShaleGolem : Monster
     {
-        public ShaleGolem(Player player, bool isElite) : base(player, "Shale Golem", false, isElite ? 65 : 85, isElite ? 5 : 10, isElite ? 10 : 15, isElite ? 15 : 35)
+        public ShaleGolem(Player player, bool isBasic) : base(player, "Shale Golem", false, isBasic ? 65 : 85, isBasic ? 5 : 10, isBasic ? 10 : 15, isBasic ? 15 : 35)
         {
 
         }

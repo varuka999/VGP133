@@ -1,17 +1,29 @@
-﻿using System.Numerics;
-
-namespace VGP133_Final_Karlsson_Vincent
+﻿namespace VGP133_Final_Karlsson_Vincent
 {
     public class GameManager
     {
-        private Player _player;
+        private Player? _player = null;
+
+        public Player? Player { get => _player; }
 
         public GameManager()
         {
-            //_player = new Player("TestPlayer", "Brown", 'M', 20, 100, 100, 3); // Player made here
-            _player = CreateCharacter();
-            _player.AddGold(50);
-            Test();
+
+            //UI.RenderMenuHeader("Game Start");
+            //Test();
+        }
+
+        public void Initialize(bool createCharacter)
+        {
+            if (createCharacter == true)
+            {
+                _player = CreateCharacter();
+                _player.AddGold(10);
+            }
+            else
+            {
+                LoadSave();
+            }
         }
 
         // Test
@@ -19,17 +31,17 @@ namespace VGP133_Final_Karlsson_Vincent
         {
             //_player = new Player("TestPlayer", "Brown", 'M', 20, 100, 10, 3);
 
-            Weapon weaponTest = new Weapon("WTest1", 0, 5, 0, 10);
-            Armor armorTest = new Armor("ATest1", 5, 0, 5, 15);
-            HealthPotion potionTest = new HealthPotion("HPTest", 5, 5);
-            HealthPotion potionTest2 = new HealthPotion("HPTest", 5, 5);
-            HealthPotion potionTest3 = new HealthPotion("HPTest2", 10, 10);
+            //Weapon weaponTest = new Weapon("WTest1", 0, 5, 0, 10);
+            //Armor armorTest = new Armor("ATest1", 5, 0, 5, 15);
+            //HealthPotion potionTest = new HealthPotion("HPTest", 5, 5);
+            //HealthPotion potionTest2 = new HealthPotion("HPTest", 5, 5);
+            //HealthPotion potionTest3 = new HealthPotion("HPTest2", 10, 10);
 
-            _player.AddItemToInventory(weaponTest);
-            _player.AddItemToInventory(armorTest);
-            _player.AddItemToInventory(potionTest);
-            _player.AddItemToInventory(potionTest2);
-            _player.AddItemToInventory(potionTest3);
+            //_player.AddItemToInventory(weaponTest);
+            //_player.AddItemToInventory(armorTest);
+            //_player.AddItemToInventory(potionTest);
+            //_player.AddItemToInventory(potionTest2);
+            //_player.AddItemToInventory(potionTest3);
             //_player.EquipEquipment(weaponTest);
             //_player.EquipEquipment(armorTest);
 
@@ -60,6 +72,7 @@ namespace VGP133_Final_Karlsson_Vincent
 
         public void GameStart()
         {
+            UI.RenderMenuHeader("Game Start");
 
         }
 
@@ -69,9 +82,9 @@ namespace VGP133_Final_Karlsson_Vincent
 
             while (gameRunning)
             {
-                Console.Clear();
-                Globals.PlayerMenuBar(_player);
-                Globals.PrintMenu<MainMenu>();
+                UI.RenderMenuHeader("Overworld");
+                UI.PlayerMenuBar(_player);
+                UI.PrintMenu<MainMenu>();
                 int menuInput = Globals.GetMenuChoice<MainMenu>();
 
                 switch ((MainMenu)menuInput)
@@ -82,9 +95,11 @@ namespace VGP133_Final_Karlsson_Vincent
                         break;
                     case MainMenu.Forest:
                         Forest forest = new Forest();
-                        forest.RunForest(_player);
+                        forest.Run(_player);
                         break;
                     case MainMenu.Mountains:
+                        Mountain mountain = new Mountain();
+                        mountain.Run(_player);
                         break;
                     case MainMenu.BossCastle:
                         break;
@@ -95,23 +110,38 @@ namespace VGP133_Final_Karlsson_Vincent
                         _player.ShowEquipmentMenu();
                         break;
                     case MainMenu.Save:
+                        UI.RenderMenuHeader("Save Slots");
                         SaveManager.ShowSaveSlots();
-                        Console.Write("Select slot to save to (1–3): ");
-                        int saveSlot = Int32.Parse(Console.ReadLine()!);
-                        SaveManager.Save(_player, saveSlot);
-                        break;
-                    case MainMenu.Load:
-                        SaveManager.ShowSaveSlots();
-                        Console.Write("Select slot to load from (1–3): ");
-                        int loadSlot = Int32.Parse(Console.ReadLine()!);
-                        Player? loaded = SaveManager.Load(loadSlot);
-                        if (loaded != null)
+                        int slotInput = 0;
+                        Console.WriteLine("Select slot to save to (0 to cancel): ");
+                        while (slotInput == 0)
                         {
-                            _player = loaded;
+                            while (Int32.TryParse(Console.ReadLine(), out slotInput) == false)
+                            {
+                                Globals.ClearConsoleLines(1);
+                            }
+
+                            if (Globals.ValidateIntInput(ref slotInput, 0, 3) == false)
+                            {
+                                Globals.ClearConsoleLines(1);
+                                continue;
+                            }
+
+                            if (slotInput == 0)
+                            {
+                                break;
+                            }
+                        }
+                        if (slotInput != 0)
+                        {
+                            SaveManager.Save(_player, slotInput);
                         }
                         break;
+                    case MainMenu.Load:
+                        LoadSave();
+                        break;
                     case MainMenu.Exit:
-                        Console.WriteLine("\n--| EXITING GAME |--\n");
+                        Console.WriteLine("\n--| EXITING GAME |--");
                         gameRunning = false;
                         break;
                     default:
@@ -133,7 +163,7 @@ namespace VGP133_Final_Karlsson_Vincent
             int baseDef = 5;
             bool error = false;
 
-            Console.WriteLine("--| Character Creation |--\n");
+            UI.RenderMenuHeader("Character Creation");
 
             Console.Write("Enter name: ");
             string input = Console.ReadLine()?.Trim() ?? ""; // Extremely rare to be null (eg, Ctrl + Z)
@@ -188,9 +218,42 @@ namespace VGP133_Final_Karlsson_Vincent
             Console.WriteLine($"Age: {age}");
             Console.WriteLine($"Base Stats: HP ({baseHP}), ATT ({baseAtt}), DEF ({baseDef})");
             Console.WriteLine("\n-Character created!-");
-            Globals.Pause();
 
             return new Player(name, hairColor, gender, age, baseHP, baseAtt, baseDef);
+        }
+
+        private void LoadSave()
+        {
+            UI.RenderMenuHeader("Save Slots");
+            SaveManager.ShowSaveSlots();
+            int loadInput = 0;
+            Console.WriteLine("Select slot to load from (0 to cancel): ");
+            while (loadInput == 0)
+            {
+                while (Int32.TryParse(Console.ReadLine(), out loadInput) == false)
+                {
+                    Globals.ClearConsoleLines(1);
+                }
+
+                if (Globals.ValidateIntInput(ref loadInput, 0, 4) == false)
+                {
+                    Globals.ClearConsoleLines(1);
+                    continue;
+                }
+
+                if (loadInput == 0)
+                {
+                    break;
+                }
+            }
+            if (loadInput != 0)
+            {
+                Player? loaded = SaveManager.Load(loadInput);
+                if (loaded != null)
+                {
+                    _player = loaded;
+                }
+            }
         }
     }
 }

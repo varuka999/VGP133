@@ -44,27 +44,6 @@ namespace VGP133_Final_Karlsson_Vincent
             }
         }
 
-        public static void PlayerMenuBar(Player player)
-        {
-            string playerMenuBar = $"--| {player.Name} | HP: {player.CurrentHP}/{player.MaxHP} | Gold: {player.Gold} |--";
-            Console.WriteLine(playerMenuBar);
-            for (int i = 0; i < playerMenuBar.Length; ++i)
-            {
-                Console.Write("-");
-            }
-            Console.WriteLine();
-        }
-
-        public static void PrintMenu<T>() where T : Enum
-        {
-            var enumValues = Enum.GetValues(typeof(T)).Cast<T>().ToList();
-
-            for (int i = 1; i < enumValues.Count; i++)
-            {
-                Console.WriteLine($"{i} - {enumValues[i]}");
-            }
-        }
-
         public static int GetMenuChoice<T>() where T : Enum
         {
             int input = 0;
