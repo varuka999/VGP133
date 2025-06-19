@@ -13,7 +13,7 @@
 
         public void Run(Player player)
         {
-            UI.RenderMenuHeader("Forest");
+            UI.RenderMenuHeader("Mountain");
             Random random = new Random();
 
             if (random.NextDouble() <= 0.5)

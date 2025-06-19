@@ -20,6 +20,7 @@ namespace VGP133_Final_Karlsson_Vincent
                 MonsterData.ClumsyOgreB => new ClumsyOgre(player, false),
                 MonsterData.PebbleBeastA=> new PebbleBeast(player, true),
                 MonsterData.PebbleBeastB => new PebbleBeast(player, false),
+                MonsterData.Boss => new Boss(player),
                 _ => new Monster(player, "Unknown", false, 10, 2, 0, 1) // No match, though shouldn't happen
             };
         }

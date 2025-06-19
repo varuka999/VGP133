@@ -37,21 +37,10 @@ namespace VGP133_Final_Karlsson_Vincent
             }
         }
 
-        protected virtual void UseSpecial(Unit unit)
+        protected virtual void UseSpecial(Unit target)
         {
-            Console.WriteLine("Used Special Attack!")
-;
+            Console.WriteLine("Used Special Attack!");
         }
-
-        //public override void TakeUnitDamage(Unit unit)
-        //{
-        //    base.TakeUnitDamage(unit);
-
-        //    if (CurrentHP <= 0)
-        //    {
-        //        DroppedGold.Invoke(_goldDropped);
-        //    }
-        //}
 
         public override CombatResult OnDeath()
         {

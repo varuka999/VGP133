@@ -70,14 +70,13 @@
             //bool test = healthPotion1.Equals(healthPotion2);
         }
 
-        public void GameStart()
-        {
-            UI.RenderMenuHeader("Game Start");
-
-        }
-
         public void Game()
         {
+            if (_player == null) // If you somehow get into the game without the proper intialization
+            {
+                _player = CreateCharacter();
+            }
+
             bool gameRunning = true;
 
             while (gameRunning)
@@ -102,6 +101,12 @@
                         mountain.Run(_player);
                         break;
                     case MainMenu.BossCastle:
+                        BossCastle bossCastle = new BossCastle();
+                        if (bossCastle.Run(_player) == true)
+                        {
+                            Globals.Pause();
+                            return; // Return to main menu
+                        }    
                         break;
                     case MainMenu.Inventory:
                         _player.ShowInventoryMenu();
@@ -158,8 +163,8 @@
             string hairColor;
             char gender;
             int age;
-            int baseHP = 100;
-            int baseAtt = 10;
+            int baseHP = 99999;
+            int baseAtt = 50;
             int baseDef = 5;
             bool error = false;
 

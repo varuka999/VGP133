@@ -116,6 +116,7 @@ namespace VGP133_Final_Karlsson_Vincent
         RecklessOgreA, RecklessOgreB,
         ClumsyOgreA, ClumsyOgreB,
         PebbleBeastA, PebbleBeastB,
+        Boss,
     }
 
     public enum ItemData
