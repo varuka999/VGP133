@@ -29,19 +29,5 @@ namespace VGP133_Final_Karlsson_Vincent
             Console.WriteLine($"{user.Name} used {Name}!");
             return false;
         }
-
-        public bool Equals(Item other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other.Name == Name)
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }

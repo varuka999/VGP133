@@ -55,7 +55,7 @@ namespace VGP133_Final_Karlsson_Vincent
             return newValue;
         }
 
-        public void AdjustCurrentHP(int amount) // The only method to modify CurrentHP. Will subtract if given a negative number
+        public void AdjustCurrentHP(int amount)
         {
             _currentHP = Math.Clamp(_currentHP + amount, 0, MaxHP); // CurrentHP can't go below 0
         }
@@ -118,8 +118,6 @@ namespace VGP133_Final_Karlsson_Vincent
         protected void EquipStatsUpdate(Equipment equippedEquipment)
         {
             MaxHP += equippedEquipment.HPBonus;
-            //Attack += equippedEquipment.AttBonus;
-            //Defense += equippedEquipment.DefBonus;
 
             AdjustCurrentHP(equippedEquipment.HPBonus); // Updates current hp, equipping counts as 'free heal'
                                                         // (ex, MaxHP = 100, CurrentHP = 80 | new armor + 10hp | MaxHP = 110, CurrentHP = 90)
@@ -129,8 +127,6 @@ namespace VGP133_Final_Karlsson_Vincent
             AdjustCurrentHP(-equippedEquipment.HPBonus); // Because equipping gave 'free health', unequiping reverts it
                                                          // (ex, MaxHP = 100, CurrentHP = 80 | remove armor that gave 10hp | MaxHP = 90, CurrentHP = 70)
             MaxHP -= equippedEquipment.HPBonus;
-            //Attack -= equippedEquipment.AttBonus;
-            //Defense -= equippedEquipment.DefBonus;
         }
 
         public void DropWeapon()

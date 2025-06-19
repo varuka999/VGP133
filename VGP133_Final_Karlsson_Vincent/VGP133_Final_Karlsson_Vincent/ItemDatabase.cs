@@ -2,7 +2,7 @@
 {
     public static class ItemDatabase
     {
-        public static Item Create(ItemData name) // Consider changing to enums
+        public static Item Create(ItemData name)
         {
             return name switch
             {

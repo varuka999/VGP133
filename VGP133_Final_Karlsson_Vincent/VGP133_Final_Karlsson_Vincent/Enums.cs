@@ -21,6 +21,7 @@ namespace VGP133_Final_Karlsson_Vincent
         BossCastle,
         Save,
         Load,
+        Delete,
         Exit,
     }
 
@@ -91,11 +92,8 @@ namespace VGP133_Final_Karlsson_Vincent
     public enum PlayerAction
     {
         Null = 0,
-        [Description("Attack")] 
         Attack,
-        [Description("Use Item")] 
         UseItem,
-        [Description("Flee Combat")] 
         Flee,
     }
 

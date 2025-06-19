@@ -6,19 +6,11 @@
 
         public Player? Player { get => _player; }
 
-        public GameManager()
-        {
-
-            //UI.RenderMenuHeader("Game Start");
-            //Test();
-        }
-
         public void Initialize(bool createCharacter)
         {
             if (createCharacter == true)
             {
-                _player = CreateCharacter();
-                _player.AddGold(10);
+                _player = CreateCharacter(false);
             }
             else
             {
@@ -26,55 +18,11 @@
             }
         }
 
-        // Test
-        public void Test()
-        {
-            //_player = new Player("TestPlayer", "Brown", 'M', 20, 100, 10, 3);
-
-            //Weapon weaponTest = new Weapon("WTest1", 0, 5, 0, 10);
-            //Armor armorTest = new Armor("ATest1", 5, 0, 5, 15);
-            //HealthPotion potionTest = new HealthPotion("HPTest", 5, 5);
-            //HealthPotion potionTest2 = new HealthPotion("HPTest", 5, 5);
-            //HealthPotion potionTest3 = new HealthPotion("HPTest2", 10, 10);
-
-            //_player.AddItemToInventory(weaponTest);
-            //_player.AddItemToInventory(armorTest);
-            //_player.AddItemToInventory(potionTest);
-            //_player.AddItemToInventory(potionTest2);
-            //_player.AddItemToInventory(potionTest3);
-            //_player.EquipEquipment(weaponTest);
-            //_player.EquipEquipment(armorTest);
-
-            //_player.ShowInventoryMenu();
-            //Monster enemy = new Monster(ref _player, "TestEnemy", false, 20, 5, 1, 5);
-
-            //_player.TakeRefUnitDamage(ref enemy);
-            //enemy.TakeRefUnitDamage(ref _player);
-
-            //Consumable healthPotion1 = new HealthPotion(ref _player, "Basic Health Potion", "", 10, 5);
-            //Consumable healthPotion2 = new HealthPotion(ref _player, "Advanced Health Potion", "", 25, 10);
-            //Consumable healthPotion3 = new HealthPotion(ref _player, "Super Health Potion", "", 50, 20);
-            //Consumable healthPotion4 = new HealthPotion(ref _player, "Basic Health Potion", "", 10, 5);
-
-            //_player.AddConsumableToInventory(healthPotion1);
-            //_player.AddConsumableToInventory(healthPotion2);
-            //_player.AddConsumableToInventory(healthPotion3);
-            //_player.AddConsumableToInventory(healthPotion4);
-
-            ////_player.UseConsumable(healthPotion4);
-            //if (_player.UseConsumable("Basic Health Potion"))
-            //{
-            //    Console.WriteLine("Item Use Success");
-            //}
-
-            //bool test = healthPotion1.Equals(healthPotion2);
-        }
-
         public void Game()
         {
-            if (_player == null) // If you somehow get into the game without the proper intialization
+            if (_player == null) // If somehow accessed without the proper intialization
             {
-                _player = CreateCharacter();
+                _player = CreateCharacter(false);
             }
 
             bool gameRunning = true;
@@ -106,7 +54,7 @@
                         {
                             Globals.Pause();
                             return; // Return to main menu
-                        }    
+                        }
                         break;
                     case MainMenu.Inventory:
                         _player.ShowInventoryMenu();
@@ -115,32 +63,10 @@
                         _player.ShowEquipmentMenu();
                         break;
                     case MainMenu.Save:
-                        UI.RenderMenuHeader("Save Slots");
-                        SaveManager.ShowSaveSlots();
-                        int slotInput = 0;
-                        Console.WriteLine("Select slot to save to (0 to cancel): ");
-                        while (slotInput == 0)
-                        {
-                            while (Int32.TryParse(Console.ReadLine(), out slotInput) == false)
-                            {
-                                Globals.ClearConsoleLines(1);
-                            }
-
-                            if (Globals.ValidateIntInput(ref slotInput, 0, 3) == false)
-                            {
-                                Globals.ClearConsoleLines(1);
-                                continue;
-                            }
-
-                            if (slotInput == 0)
-                            {
-                                break;
-                            }
-                        }
-                        if (slotInput != 0)
-                        {
-                            SaveManager.Save(_player, slotInput);
-                        }
+                        Save();
+                        break;
+                    case MainMenu.Delete:
+                        DeleteSave();
                         break;
                     case MainMenu.Load:
                         LoadSave();
@@ -157,15 +83,16 @@
             }
         }
 
-        private Player CreateCharacter()
+        private Player CreateCharacter(bool cheatMode)
         {
             string name;
             string hairColor;
             char gender;
             int age;
-            int baseHP = 99999;
-            int baseAtt = 50;
+            int baseHP = cheatMode ? 99999 : 100;
+            int baseAtt = cheatMode ? 100 : 10;
             int baseDef = 5;
+            int baseGold = cheatMode ? 10000 : 10;
             bool error = false;
 
             UI.RenderMenuHeader("Character Creation");
@@ -224,12 +151,42 @@
             Console.WriteLine($"Base Stats: HP ({baseHP}), ATT ({baseAtt}), DEF ({baseDef})");
             Console.WriteLine("\n-Character created!-");
 
-            return new Player(name, hairColor, gender, age, baseHP, baseAtt, baseDef);
+            return new Player(name, hairColor, gender, age, baseHP, baseAtt, baseDef, baseGold);
+        }
+
+        private void Save()
+        {
+            UI.RenderMenuHeader("Save Slots");
+            SaveManager.ShowSaveSlots();
+            int slotInput = 0;
+            Console.WriteLine("Select slot to save to (0 to cancel): ");
+            while (slotInput == 0)
+            {
+                while (Int32.TryParse(Console.ReadLine(), out slotInput) == false)
+                {
+                    Globals.ClearConsoleLines(1);
+                }
+
+                if (Globals.ValidateIntInput(ref slotInput, 0, 3) == false)
+                {
+                    Globals.ClearConsoleLines(1);
+                    continue;
+                }
+
+                if (slotInput == 0)
+                {
+                    break;
+                }
+            }
+            if (slotInput != 0)
+            {
+                SaveManager.Save(_player, slotInput);
+            }
         }
 
         private void LoadSave()
         {
-            UI.RenderMenuHeader("Save Slots");
+            UI.RenderMenuHeader("Load Save");
             SaveManager.ShowSaveSlots();
             int loadInput = 0;
             Console.WriteLine("Select slot to load from (0 to cancel): ");
@@ -258,6 +215,45 @@
                 {
                     _player = loaded;
                 }
+            }
+        }
+
+        private void DeleteSave()
+        {
+            UI.RenderMenuHeader("Delete Save");
+            SaveManager.ShowSaveSlots();
+
+            int deleteInput = 0;
+            Console.WriteLine("Select slot to delete (0 to cancel): ");
+            while (deleteInput == 0)
+            {
+                while (Int32.TryParse(Console.ReadLine(), out deleteInput) == false)
+                {
+                    Globals.ClearConsoleLines(1);
+                }
+
+                if (Globals.ValidateIntInput(ref deleteInput, 0, 4) == false)
+                {
+                    Globals.ClearConsoleLines(1);
+                    continue;
+                }
+
+                if (deleteInput == 0)
+                {
+                    return;
+                }
+            }
+
+            string filePath = SaveManager.GetSaveNameFormatPath(deleteInput);
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                Console.WriteLine($"Save Slot {deleteInput} deleted!");
+            }
+            else
+            {
+                Console.WriteLine("Save file does not exist.");
             }
         }
     }

@@ -6,7 +6,7 @@ namespace VGP133_Final_Karlsson_Vincent
     {
         public static void Save(Player player, int saveSlot)
         {
-            string xmlFile = $"Player({saveSlot}).xml";
+            string xmlFile = GetSaveNameFormatPath(saveSlot);
 
             XmlSerializer serializer = new XmlSerializer(typeof(Player));
             using (StreamWriter writer = new StreamWriter(xmlFile))
@@ -19,7 +19,7 @@ namespace VGP133_Final_Karlsson_Vincent
 
         public static Player? Load(int saveSlot)
         {
-            string xmlFile = $"Player({saveSlot}).xml";
+            string xmlFile = GetSaveNameFormatPath(saveSlot);
 
             if (File.Exists(xmlFile) == true)
             {
@@ -42,23 +42,26 @@ namespace VGP133_Final_Karlsson_Vincent
         {
             for (int i = 1; i < 4; i++)
             {
-                string path = $"Player({i}).xml";
+                string path = GetSaveNameFormatPath(i);
                 if (File.Exists(path))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(Player));
                     using (StreamReader reader = new StreamReader(path))
                     {
                         Player temp = (Player)serializer.Deserialize(reader)!;
-                        Console.WriteLine($"{i}: {temp.Name}");
+                        Console.WriteLine($"{i}: Player Name: {temp.Name}");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"{i}: [Empty]");
+                    Console.WriteLine($"{i}: [Empty Save Slot]");
                 }
             }
         }
+
+        public static string GetSaveNameFormatPath(int slot)
+        {
+            return $"Player{slot}.xml";
+        }
     }
-
-
 }

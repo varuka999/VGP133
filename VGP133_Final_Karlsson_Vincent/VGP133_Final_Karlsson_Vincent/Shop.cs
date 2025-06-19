@@ -36,7 +36,7 @@ namespace VGP133_Final_Karlsson_Vincent
             {
                 UI.RenderMenuHeader($"{shopType.ToString()} Shop");
                 UI.PlayerMenuBar(player);
-                //Console.WriteLine($"{shopType.ToString()} Shop!");
+
                 for (int i = 0; i < shopItems.Count; i++)
                 {
                     Console.WriteLine($"{i + 1} - {shopItems[i].Name} ({shopItems[i].Cost}g)");
@@ -75,7 +75,7 @@ namespace VGP133_Final_Karlsson_Vincent
                     Globals.Pause();
                 }
 
-                if (selectedItem is Consumable consumable) // So far only health potion as consumable, might add more types which will require updates here
+                if (selectedItem is Consumable consumable)
                 {
                     HealthPotion newItem = new HealthPotion(selectedItem.Name, ((HealthPotion)selectedItem).ModifierAmount, selectedItem.Cost);
                     player.AddItemToInventory(newItem);

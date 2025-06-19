@@ -3,7 +3,7 @@
     [Serializable]
     public class Player : Unit
     {
-        protected string _hairColor = ""; // avoiding warning
+        protected string _hairColor;
         protected char _gender;
         protected int _age;
         protected int _gold = 0;
@@ -22,12 +22,13 @@
             _gold = 0;
         }
 
-        public Player(string name, string hairColor, char gender, int age, int maxHP, int attack, int defense) : base(name, maxHP, attack, defense)
+        public Player(string name, string hairColor, char gender, int age, int maxHP, int attack, int defense, int gold) : base(name, maxHP, attack, defense)
         {
-            HairColor = hairColor;
-            Type = UnitType.Player;
-            Gender = gender;
+            _hairColor = hairColor;
+            _unitType = UnitType.Player;
+            _gender = gender;
             Age = age;
+            AddGold(gold);
         }
 
         public void AddGold(int amount)
@@ -87,7 +88,7 @@
                     }
                 }
 
-                var groupedList = filteredForConsumables.ToList(); // Converts to ienumerable to list so I can index easier
+                var groupedList = filteredForConsumables.ToList(); // Converts to ienumerable to list for indexing purposes
 
                 return UseConsumable(groupedList[input - 1].Name);
             }
@@ -100,7 +101,7 @@
                 if (item.Name == name)
                 {
                     item.Use(this);
-                    _inventory.Remove(item); // Not safe, but should be ok as it exits the for loop immediately after
+                    _inventory.Remove(item); // Not safe, but should be ok as is, it exits the for loop immediately after altering the container
                     return true;
                 }
             }
@@ -181,7 +182,7 @@
                 }
             }
 
-            var equipmentSelected = filteredForEquipment[input - 1].Items[0]; // Picks the first matching item
+            var equipmentSelected = filteredForEquipment[input - 1].Items[0]; // Picks the first matching equipment in its list (That share the same name)
 
             if (equipmentSelected is Weapon newWeapon)
             {
@@ -211,9 +212,6 @@
         private void DisplaySortedGroupedInventory(SortType sortOption)
         {
             UI.RenderMenuHeader($"Sorted by ({sortOption})");
-            //Console.Clear();
-            //Console.WriteLine($"--| Sorted by ({sortOption}) |--\n");
-
             DisplayList(_inventory, sortOption);
         }
 

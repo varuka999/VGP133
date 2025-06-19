@@ -8,7 +8,6 @@ namespace VGP133_Final_Karlsson_Vincent
         {
             Random random = new Random();
 
-            //int turns = 1;
             int attackingIndex = 0;
             int defendingIndex = 1;
 
