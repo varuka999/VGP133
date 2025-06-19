@@ -23,15 +23,17 @@ namespace VGP133_Final_Karlsson_Vincent
             Armor armorTest = new Armor("ATest1", 5, 0, 5, 15);
             HealthPotion potionTest = new HealthPotion("HPTest", 5, 5);
             HealthPotion potionTest2 = new HealthPotion("HPTest", 5, 5);
+            HealthPotion potionTest3 = new HealthPotion("HPTest2", 10, 10);
 
             _player.AddItemToInventory(weaponTest);
             _player.AddItemToInventory(armorTest);
             _player.AddItemToInventory(potionTest);
             _player.AddItemToInventory(potionTest2);
+            _player.AddItemToInventory(potionTest3);
             //_player.EquipEquipment(weaponTest);
             //_player.EquipEquipment(armorTest);
 
-            _player.ShowInventoryMenu();
+            //_player.ShowInventoryMenu();
             //Monster enemy = new Monster(ref _player, "TestEnemy", false, 20, 5, 1, 5);
 
             //_player.TakeRefUnitDamage(ref enemy);
@@ -106,7 +108,7 @@ namespace VGP133_Final_Karlsson_Vincent
             char gender;
             int age;
             int baseHP = 100;
-            int baseAtt = 1;
+            int baseAtt = 10;
             int baseDef = 5;
             bool error = false;
 

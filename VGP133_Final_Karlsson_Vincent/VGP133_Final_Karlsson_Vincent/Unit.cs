@@ -132,10 +132,9 @@ namespace VGP133_Final_Karlsson_Vincent
                                                          // (ex, MaxHP = 100, CurrentHP = 80 | remove armor that gave 10hp | MaxHP = 90, CurrentHP = 70)
         }
 
-        public virtual bool OnDeath()
+        public virtual CombatResult OnDeath()
         {
-            Console.WriteLine("ON DEATH EVENT");
-            return false;
+            return Type == UnitType.Player ? CombatResult.PlayerDefeat : CombatResult.PlayerVictory;
         }
 
     }

@@ -27,7 +27,7 @@ namespace VGP133_Final_Karlsson_Vincent
 
         public static void Pause()
         {
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
         }
 

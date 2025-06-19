@@ -1,4 +1,6 @@
-﻿namespace VGP133_Final_Karlsson_Vincent
+﻿using System.Text.RegularExpressions;
+
+namespace VGP133_Final_Karlsson_Vincent
 {
     public class Player : Unit
     {
@@ -34,32 +36,80 @@
             _gold = Math.Max(_gold + amount, 0);
         }
 
-        //public void UseConsumable(Consumable consumable)
-        //{
-        //    if (consumable != null) 
-        //    {
-        //        if (_inventory.Contains(consumable) == true)
-        //        {
-        //            consumable.Consume();
-        //            _inventory.Remove(consumable);
-        //        }
-        //    }
-        //}
+        public bool UseItemCombatAction(Unit user)
+        {
+            while (true)
+            {
+                var filteredForConsumables = from item in _inventory
+                                             where item is Consumable
+                                             group item by item.Name into groupedItems
+                                             orderby groupedItems.Key ascending
+                                             select new { Name = groupedItems.Key, Count = groupedItems.Count() };
 
-        //public bool UseConsumable(string name)
-        //{
-        //    foreach (Consumable c in _inventory)
-        //    {
-        //        if (c.Name == name)
-        //        {
-        //            c.Consume();
-        //            _inventory.Remove(c);
-        //            return true;
-        //        }
-        //    }
+                if (filteredForConsumables.Count() == 0)
+                {
+                    return false;
+                }
 
-        //    return false;
-        //}
+                int i = 0;
+                int input = 0;
+                Console.WriteLine("Inventory:");
+                foreach (var itemGroup in filteredForConsumables)
+                {
+                    ++i;
+                    Console.WriteLine($"{i}-{itemGroup.Name} x{itemGroup.Count}");
+                }
+
+                Console.WriteLine("Item to use (0 to cancel): ");
+                while (input == 0)
+                {
+                    while (Int32.TryParse(Console.ReadLine(), out input) == false)
+                    {
+                        Globals.ClearConsoleLines(1);
+                    }
+
+                    if (Globals.ValidateIntInput(ref input, 0, filteredForConsumables.Count() + 1) == false)
+                    {
+                        Globals.ClearConsoleLines(1);
+                        continue;
+                    }
+
+                    if (input == 0)
+                    {
+                        return false;
+                    }
+                }
+
+                var groupedList = filteredForConsumables.ToList(); // Converts to ienumerable to list so I can index easier
+
+                return UseConsumable(groupedList[input - 1].Name);
+
+                //i = 0;
+                //foreach (var item in filteredForConsumables)
+                //{
+                //    ++i;
+                //    if (i == input)
+                //    {
+                //        return UseConsumable(item.Name);
+                //    }
+                //}
+            }
+        }
+
+        public bool UseConsumable(string name)
+        {
+            foreach (Item item in _inventory)
+            {
+                if (item.Name == name)
+                {
+                    item.Use(this);
+                    _inventory.Remove(item); // Not safe, but should be ok as it exits the for loop immediately after
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         public void ShowInventoryMenu()
         {
@@ -72,12 +122,12 @@
                 int menuInput = Globals.GetMenuChoice<SortType>();
 
                 SortType sortOption = (SortType)menuInput;
-                DisplayGroupedInventory(sortOption);
+                DisplaySortedGroupedInventory(sortOption);
                 Globals.Pause();
             }
         }
 
-        private void DisplayGroupedInventory(SortType sortOption)
+        private void DisplaySortedGroupedInventory(SortType sortOption)
         {
             Console.Clear();
             Console.WriteLine($"--| Inventory ({sortOption}) |--\n");
@@ -114,11 +164,20 @@
             }
         }
 
-        public override bool OnDeath()
+        public PlayerAction PlayerCombatActions()
         {
-            Console.WriteLine($"PLAYER ({Name}) DIED");
-            return true;
+            Globals.PrintMenu<PlayerAction>();
+            int playerAction = Globals.GetMenuChoice<PlayerAction>();
+
+            return (PlayerAction)playerAction;
         }
+
+        //public override CombatResult OnDeath()
+        //{
+        //    //Console.WriteLine($"Player ({Name}) Died!");
+        //    //return CombatResult.PlayerDefeat;
+        //    return base.OnDeath();
+        //}
     }
 
 }

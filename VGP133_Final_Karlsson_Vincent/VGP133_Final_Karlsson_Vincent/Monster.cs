@@ -47,13 +47,13 @@ namespace VGP133_Final_Karlsson_Vincent
         //    }
         //}
 
-        public override bool OnDeath()
+        public override CombatResult OnDeath()
         {
-            Console.WriteLine($"MONSTER ({Name}) DIED");
+            Console.WriteLine($"Monster ({Name}) Died");
             Console.WriteLine($"({Name}) dropped {_goldDrop} gold!");
             DroppedGold.Invoke(_goldDrop);
 
-            return false;
+            return base.OnDeath();
         }
     }
 }

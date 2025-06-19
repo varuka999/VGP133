@@ -17,7 +17,7 @@ namespace VGP133_Final_Karlsson_Vincent
         // Takes list of units, correctly distributes based on type
         // simulates battle
 
-        public bool Combat(List<Unit> units) // Returns true if player exited combat safely, to determine exit sequence in previous 'scenes'
+        public CombatResult Combat(List<Unit> units) // Returns true if player exited combat safely, to determine exit sequence in previous 'scenes'
         {
             Random random = new Random();
 
@@ -27,24 +27,47 @@ namespace VGP133_Final_Karlsson_Vincent
 
             while (units[0].CurrentHP > 0 && units.Count > 1)
             {
-                units[attackingIndex].AttackTarget(units[defendingIndex]);
 
-                if (units[defendingIndex].CurrentHP <= 0) 
+                if (units[attackingIndex] is Player player) // If is Player class, declare 'player' as casted type
                 {
-                    bool isPlayerDead = units[defendingIndex].OnDeath();
-                    return !isPlayerDead;
+                    PlayerAction action = player.PlayerCombatActions();
+                    switch (action)
+                    {
+                        case PlayerAction.Attack:
+                            player.AttackTarget(units[defendingIndex]);
+                            break;
+                        case PlayerAction.UseItem:
+                            if (player.UseItemCombatAction(player) == false)
+                            {
+                                //Console.WriteLine("Failed to use item!");
+                                continue;
+                            }
+                            break;
+                        case PlayerAction.Flee:
+                            return CombatResult.PlayerFlee;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    units[attackingIndex].AttackTarget(units[defendingIndex]);
                 }
 
-                //Console.ReadKey();
+                if (units[defendingIndex].CurrentHP <= 0)
+                {
+                    CombatResult result = units[defendingIndex].OnDeath();
+                    return result;
+                }
 
-                // Swap attackers/defenders (1v1)
+                Globals.Pause();
+
                 attackingIndex = 1 - attackingIndex;
                 defendingIndex = 1 - defendingIndex;
             }
 
-            return true;
+            return CombatResult.PlayerVictory;
         }
-
 
         //public delegate void OnDeath();
     }

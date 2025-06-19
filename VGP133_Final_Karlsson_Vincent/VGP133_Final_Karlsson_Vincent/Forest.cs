@@ -36,17 +36,32 @@
 
             CombatManager combatInstance = new CombatManager();
 
-            if (combatInstance.Combat(units))
+            CombatResult result = combatInstance.Combat(units);
+            switch (result)
             {
-                // Continue exploring forest prompt
-                 Console.WriteLine("Continue exploring the forest?");
-            }
-            else
-            {
-                // Return to overworld
-                Console.WriteLine("Returning to overworld..");
+                case CombatResult.PlayerVictory:
+                    Console.WriteLine("You win!");
+                    break;
+                case CombatResult.PlayerFlee:
+                    Console.WriteLine("You fled the battle.");
+                    break;
+                case CombatResult.PlayerDefeat:
+                    Console.WriteLine("You were defeated...");
+                    break;
             }
 
+            //if (combatInstance.Combat(units))
+            //{
+            //    // Continue exploring forest prompt
+            //     Console.WriteLine("Continue exploring the forest?");
+            //}
+            //else
+            //{
+            //    // Return to overworld
+            //    Console.WriteLine("Returning to overworld..");
+            //}
+
+            
             Globals.Pause();
         }
     }

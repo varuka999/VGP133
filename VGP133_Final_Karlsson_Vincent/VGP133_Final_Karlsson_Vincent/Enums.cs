@@ -1,4 +1,6 @@
-﻿namespace VGP133_Final_Karlsson_Vincent
+﻿using System.ComponentModel;
+
+namespace VGP133_Final_Karlsson_Vincent
 {
     public enum MainMenu
     {
@@ -76,5 +78,24 @@
         Name,
         TypeName,
         Quantity,
+    }
+
+    public enum PlayerAction
+    {
+        Null = 0,
+        [Description("Attack")] 
+        Attack,
+        [Description("Use Item")] 
+        UseItem,
+        [Description("Flee Combat")] 
+        Flee,
+    }
+
+    public enum CombatResult
+    {
+        Null = 0,
+        PlayerVictory,
+        PlayerFlee,
+        PlayerDefeat,
     }
 }
