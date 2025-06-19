@@ -146,7 +146,6 @@
             if (filteredForEquipment.Count() == 0)
             {
                 Console.WriteLine("No Equipments!");
-                Globals.Pause();
                 return;
             }
 
@@ -280,6 +279,7 @@
         public override CombatResult OnDeath()
         {
             _gold /= 2;
+            _currentHP = 1;
 
             return base.OnDeath();
         }

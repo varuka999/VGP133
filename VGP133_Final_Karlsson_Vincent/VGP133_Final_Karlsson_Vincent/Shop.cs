@@ -14,14 +14,14 @@ namespace VGP133_Final_Karlsson_Vincent
             bool error = false;
             List<Item> shopItems = new List<Item>();
 
-            if (shopType == TownMenu.Consumable)
+            if (shopType == TownMenu.ConsumableShop)
             {
                 foreach (var item in _consumableList)
                 {
                     shopItems.Add(ItemDatabase.Create(item));
                 }
             }
-            else if (shopType == TownMenu.Equipment)
+            else if (shopType == TownMenu.EquipmentShop)
             {
                 foreach (var item in _equipmentList)
                 {
@@ -31,7 +31,7 @@ namespace VGP133_Final_Karlsson_Vincent
 
             while (true)
             {
-                UI.RenderMenuHeader($"{shopType} Shop");
+                UI.RenderMenuHeader($"{shopType}");
                 UI.PlayerMenuBar(player);
 
                 for (int i = 0; i < shopItems.Count; i++)

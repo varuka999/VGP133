@@ -4,7 +4,7 @@ namespace VGP133_Final_Karlsson_Vincent
 {
     internal class Boss : Monster
     {
-        public Boss(Player player) : base(player, "Progenitus, Monster Lord", true, 200, 25, 15, 1000)
+        public Boss(Player player) : base(player, "Progenitus, Monster Lord", true, 200, 15, 10, 1000)
         {
             
         }

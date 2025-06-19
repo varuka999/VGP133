@@ -15,15 +15,21 @@
                     player.AdjustCurrentHP(player.MaxHP);
                     Console.WriteLine("Visited the Inn and healed to full!");
                     break;
-                case TownMenu.Consumable:
+                case TownMenu.ConsumableShop:
                     Shop consumableShopInstance = new Shop();
-                    consumableShopInstance.ShopMenu(player, TownMenu.Consumable);
+                    consumableShopInstance.ShopMenu(player, TownMenu.ConsumableShop);
                     break;
-                case TownMenu.Equipment:
+                case TownMenu.EquipmentShop:
                     Shop equipmentShopInstance = new Shop();
-                    equipmentShopInstance.ShopMenu(player, TownMenu.Equipment);
+                    equipmentShopInstance.ShopMenu(player, TownMenu.EquipmentShop);
                     break;
-                case TownMenu.Character:
+                case TownMenu.CheckInventory:
+                    player.ShowInventoryMenu();
+                    break;
+                case TownMenu.CheckEquipment:
+                    player.ShowEquipmentMenu();
+                    break;
+                case TownMenu.CheckCharacter:
                     player.DisplayStats();
                     break;
                 case TownMenu.Exit:

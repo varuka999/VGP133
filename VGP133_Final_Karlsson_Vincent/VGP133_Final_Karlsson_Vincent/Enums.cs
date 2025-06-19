@@ -15,11 +15,7 @@ namespace VGP133_Final_Karlsson_Vincent
     {
         Null = 0,
         Town,
-        Inventory,
-        Equipment,
-        Forest,
-        Mountains,
-        BossCastle,
+        Explore,
         Save,
         Load,
         Delete,
@@ -39,9 +35,11 @@ namespace VGP133_Final_Karlsson_Vincent
     {
         Null = 0,
         Inn,
-        Consumable,
-        Equipment,
-        Character,
+        ConsumableShop,
+        EquipmentShop,
+        CheckInventory,
+        CheckEquipment,
+        CheckCharacter,
         Exit,
     }
 

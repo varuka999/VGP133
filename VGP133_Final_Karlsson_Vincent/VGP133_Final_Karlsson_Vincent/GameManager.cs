@@ -40,27 +40,11 @@
                         Town town = new Town();
                         town.TownScene(_player);
                         break;
-                    case MainMenu.Forest:
-                        Forest forest = new Forest();
-                        forest.Run(_player);
-                        break;
-                    case MainMenu.Mountains:
-                        Mountain mountain = new Mountain();
-                        mountain.Run(_player);
-                        break;
-                    case MainMenu.BossCastle:
-                        BossCastle bossCastle = new BossCastle();
-                        if (bossCastle.Run(_player) == true)
+                    case MainMenu.Explore:
+                        if (ExploreScene() == true) // Beat the boss
                         {
-                            Globals.Pause();
-                            return; // Return to main menu
+                            return; // return to game start
                         }
-                        break;
-                    case MainMenu.Inventory:
-                        _player.ShowInventoryMenu();
-                        break;
-                    case MainMenu.Equipment:
-                        _player.ShowEquipmentMenu();
                         break;
                     case MainMenu.Save:
                         Save();
@@ -154,8 +138,52 @@
             return new Player(name, hairColor, gender, age, baseHP, baseAtt, baseDef, baseGold);
         }
 
+        private bool ExploreScene()
+        {
+            if (_player == null)
+            {
+                Console.WriteLine("ERROR! No Player!");
+                 return false;
+            }
+
+            UI.RenderMenuHeader("Wilderness");
+            UI.PlayerMenuBar(_player);
+            UI.PrintMenu<ExploreMenu>();
+            int menuInput = Globals.GetMenuChoice<ExploreMenu>();
+
+            switch ((ExploreMenu)menuInput)
+            {
+                case ExploreMenu.Forest:
+                    Forest forest = new Forest();
+                    forest.Run(_player);
+                    break;
+                case ExploreMenu.Mountains:
+                    Mountain mountain = new Mountain();
+                    mountain.Run(_player);
+                    break;
+                case ExploreMenu.BossCastle:
+                    BossCastle bossCastle = new BossCastle();
+                    if (bossCastle.Run(_player) == true)
+                    {
+                        Globals.Pause();
+                        return true; // Return to main menu
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            return false;
+        }
+
         private void Save()
         {
+            if (_player == null) 
+            {
+                Console.WriteLine("ERROR! No Player!");
+                return;
+            }
+
             UI.RenderMenuHeader("Save Slots");
             SaveManager.ShowSaveSlots();
             int slotInput = 0;
