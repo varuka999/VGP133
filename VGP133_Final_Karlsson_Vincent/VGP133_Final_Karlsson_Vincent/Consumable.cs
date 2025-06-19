@@ -1,5 +1,6 @@
 ﻿namespace VGP133_Final_Karlsson_Vincent
 {
+    [Serializable]
     public class Consumable : Item
     {
         protected int _modifierAmount;

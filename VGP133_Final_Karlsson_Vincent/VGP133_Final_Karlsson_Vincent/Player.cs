@@ -1,7 +1,6 @@
-﻿using System.Text.RegularExpressions;
-
-namespace VGP133_Final_Karlsson_Vincent
+﻿namespace VGP133_Final_Karlsson_Vincent
 {
+    [Serializable]
     public class Player : Unit
     {
         protected string _hairColor = ""; // avoiding warning

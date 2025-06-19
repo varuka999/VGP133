@@ -1,5 +1,11 @@
-﻿namespace VGP133_Final_Karlsson_Vincent
+﻿using System.Xml.Serialization;
+
+namespace VGP133_Final_Karlsson_Vincent
 {
+    [Serializable]
+    [XmlInclude(typeof(Consumable))]
+    [XmlInclude(typeof(Armor))]
+    [XmlInclude(typeof(Weapon))]
     public abstract class Item
     {
         protected string _name = "";

@@ -2,7 +2,7 @@
 {
     internal class LargeLeech : Monster
     {
-        public LargeLeech(Player player, string name, bool isBoss, int maxHP, int attack, int defense, int goldDropped) : base(player, name, isBoss, maxHP, attack, defense, goldDropped)
+        public LargeLeech(Player player, bool isElite) : base(player, "Large Leech", false, isElite ? 25 : 40, isElite ? 5 : 8, isElite ? 2 : 4, isElite ? 10 : 20)
         {
 
         }
@@ -14,11 +14,8 @@
             target.TakeDamage(damage);
 
             Console.WriteLine($"{Name} uses Blood Drain!");
-            Console.WriteLine($"{Name} is attacking {target.Name} for {damage}!");
-            int healAmount = (int)(damage * 0.5);
-
-            AdjustCurrentHP(healAmount);
-            Console.WriteLine($"{Name} drains {healAmount} HP from {target.Name}!");
+            Console.WriteLine($"{Name} drains {damage} HP from {target.Name}!");
+            AdjustCurrentHP(damage);
         }
     }
 }
