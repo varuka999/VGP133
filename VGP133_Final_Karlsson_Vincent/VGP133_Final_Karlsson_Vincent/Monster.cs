@@ -1,13 +1,15 @@
 ﻿using System.Xml.Linq;
+using VGP133_Final_Karlsson_Vincent;
 
 namespace VGP133_Final_Karlsson_Vincent
 {
     public class Monster : Unit
     {
         protected int _goldDrop;
-        protected List<Item> _lootTable = new List<Item>();
+        //protected List<Item> _lootTable = new List<Item>();
 
         public event Death1 DroppedGold;
+        public event Death2 DroppedItems;
 
         public Monster(Player player, string name, bool isBoss, int maxHP, int attack, int defense, int goldDropped) : base(name, maxHP, attack, defense)
         {
@@ -16,6 +18,7 @@ namespace VGP133_Final_Karlsson_Vincent
             _goldDrop = goldDropped;
 
             DroppedGold += player.AddGold;
+            DroppedItems += player.AddListOfItems;
         }
 
         public override void AttackTarget(Unit target)
@@ -32,10 +35,11 @@ namespace VGP133_Final_Karlsson_Vincent
             }
         }
 
-        private void UseSpecial(Unit unit)
+        protected virtual void UseSpecial(Unit unit)
         {
             Console.WriteLine("Used Special Attack!")
-;        }
+;
+        }
 
         //public override void TakeUnitDamage(Unit unit)
         //{
@@ -49,9 +53,17 @@ namespace VGP133_Final_Karlsson_Vincent
 
         public override CombatResult OnDeath()
         {
-            Console.WriteLine($"Monster ({Name}) Died");
+            Console.WriteLine($"\nMonster ({Name}) Died");
+
             Console.WriteLine($"({Name}) dropped {_goldDrop} gold!");
-            DroppedGold.Invoke(_goldDrop);
+            DroppedGold?.Invoke(_goldDrop);
+            
+            UnequipAllEquipment();
+            if (_inventory.Count > 0)
+            {
+                Console.WriteLine($"({Name}) dropped some items!");
+                DroppedItems?.Invoke(_inventory);
+            }
 
             return base.OnDeath();
         }
@@ -59,3 +71,4 @@ namespace VGP133_Final_Karlsson_Vincent
 }
 
 public delegate void Death1(int i);
+public delegate void Death2(List<Item> i);

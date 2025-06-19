@@ -25,44 +25,39 @@
         public void RunForest(Player player)
         {
             Console.Clear();
-
-            List<Unit> units = new List<Unit>();
             Random random = new Random();
 
-            units.Add(player);
-            Monster tempMonster = new Monster(player, "", false, 0, 0, 0, 0);
-            tempMonster = monsterPool[random.Next(0, monsterPool.Count())];
-            units.Add(tempMonster);
-
-            CombatManager combatInstance = new CombatManager();
-
-            CombatResult result = combatInstance.Combat(units);
-            switch (result)
+            if (random.NextDouble() <= 0.5)
             {
-                case CombatResult.PlayerVictory:
-                    Console.WriteLine("You win!");
-                    break;
-                case CombatResult.PlayerFlee:
-                    Console.WriteLine("You fled the battle.");
-                    break;
-                case CombatResult.PlayerDefeat:
-                    Console.WriteLine("You were defeated...");
-                    break;
+                // Random Loot reward
+            }
+            else
+            {
+                List<Unit> units = new List<Unit>();
+
+                units.Add(player);
+                Monster tempMonster = new Monster(player, "", false, 0, 0, 0, 0);
+                tempMonster = monsterPool[random.Next(0, monsterPool.Count())];
+                units.Add(tempMonster);
+
+                CombatManager combatInstance = new CombatManager();
+
+                CombatResult result = combatInstance.Combat(units);
+                switch (result)
+                {
+                    case CombatResult.PlayerVictory:
+                        Console.WriteLine("You beat the monster!");
+                        break;
+                    case CombatResult.PlayerFlee:
+                        Console.WriteLine("You fled the battle.");
+                        break;
+                    case CombatResult.PlayerDefeat:
+                        Console.WriteLine("You were defeated...");
+                        break;
+                }
             }
 
-            //if (combatInstance.Combat(units))
-            //{
-            //    // Continue exploring forest prompt
-            //     Console.WriteLine("Continue exploring the forest?");
-            //}
-            //else
-            //{
-            //    // Return to overworld
-            //    Console.WriteLine("Returning to overworld..");
-            //}
-
-            
-            Globals.Pause();
+            //Globals.Pause();
         }
     }
 }

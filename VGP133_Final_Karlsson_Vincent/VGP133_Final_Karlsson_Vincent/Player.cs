@@ -36,6 +36,14 @@ namespace VGP133_Final_Karlsson_Vincent
             _gold = Math.Max(_gold + amount, 0);
         }
 
+        public void AddListOfItems(List<Item> items)
+        {
+            foreach (Item item in items)
+            {
+                _inventory.Add(item);
+            }
+        }
+
         public bool UseItemCombatAction(Unit user)
         {
             while (true)
@@ -278,12 +286,12 @@ namespace VGP133_Final_Karlsson_Vincent
             Console.WriteLine($"Armor: {(EquippedArmor != null ? EquippedArmor.Name : "None")}");
         }
 
-        //public override CombatResult OnDeath()
-        //{
-        //    //Console.WriteLine($"Player ({Name}) Died!");
-        //    //return CombatResult.PlayerDefeat;
-        //    return base.OnDeath();
-        //}
+        public override CombatResult OnDeath()
+        {
+            _gold /= 2;
+
+            return base.OnDeath();
+        }
     }
 
 }

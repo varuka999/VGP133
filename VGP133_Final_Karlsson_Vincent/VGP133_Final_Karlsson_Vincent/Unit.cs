@@ -131,6 +131,31 @@ namespace VGP133_Final_Karlsson_Vincent
             //Defense -= equippedEquipment.DefBonus;
         }
 
+        public void DropWeapon()
+        {
+            if (_equippedWeapon != null)
+            {
+                UnequipStatsUpdate(_equippedWeapon);
+                _equippedWeapon = null;
+            }
+        }
+
+        protected void UnequipAllEquipment()
+        {
+            if (_equippedWeapon != null)
+            {
+                _inventory.Add(_equippedWeapon);
+                UnequipStatsUpdate(_equippedWeapon);
+                _equippedWeapon = null;
+            }
+            if (_equippedArmor != null)
+            {
+                _inventory.Add(_equippedArmor);
+                UnequipStatsUpdate(_equippedArmor);
+                _equippedArmor = null;
+            }
+        }
+
         public virtual CombatResult OnDeath()
         {
             return Type == UnitType.Player ? CombatResult.PlayerDefeat : CombatResult.PlayerVictory;

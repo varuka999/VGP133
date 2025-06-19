@@ -14,7 +14,6 @@ namespace VGP133_Final_Karlsson_Vincent
 
             while (units[0].CurrentHP > 0 && units.Count > 1)
             {
-
                 if (units[attackingIndex] is Player player) // If is Player class, declare 'player' as casted type
                 {
                     PlayerAction action = player.PlayerCombatActions();
@@ -31,7 +30,15 @@ namespace VGP133_Final_Karlsson_Vincent
                             }
                             break;
                         case PlayerAction.Flee:
-                            return CombatResult.PlayerFlee;
+                            if (units[defendingIndex].Type == UnitType.Boss)
+                            {
+                                Console.WriteLine("Unable to flee form boss!");
+                                continue;
+                            }
+                            else
+                            {
+                                return CombatResult.PlayerFlee;
+                            }
                         default:
                             break;
                     }

@@ -1,7 +1,5 @@
 ﻿using VGP133_Final_Karlsson_Vincent;
 
-
-
 // Flow
 // Character creation: name, info etc
 // choose class (preset stats, enum?, fake SO)
@@ -21,7 +19,7 @@
 // - Final boss fight (losing applies penalties)
 
 //Test
-List<Item> inventoryTest = new List<Item>();
+//List<Item> inventoryTest = new List<Item>();
 //Equipment equipment1 = new Equipment();
 //inventoryTest.Add(equipment1);
 
