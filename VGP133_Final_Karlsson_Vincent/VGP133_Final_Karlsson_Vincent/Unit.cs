@@ -124,12 +124,11 @@ namespace VGP133_Final_Karlsson_Vincent
         }
         protected void UnequipStatsUpdate(Equipment equippedEquipment)
         {
+            AdjustCurrentHP(-equippedEquipment.HPBonus); // Because equipping gave 'free health', unequiping reverts it
+                                                         // (ex, MaxHP = 100, CurrentHP = 80 | remove armor that gave 10hp | MaxHP = 90, CurrentHP = 70)
             MaxHP -= equippedEquipment.HPBonus;
             //Attack -= equippedEquipment.AttBonus;
             //Defense -= equippedEquipment.DefBonus;
-
-            AdjustCurrentHP(-equippedEquipment.HPBonus); // Because equipping gave 'free health', unequiping reverts it
-                                                         // (ex, MaxHP = 100, CurrentHP = 80 | remove armor that gave 10hp | MaxHP = 90, CurrentHP = 70)
         }
 
         public virtual CombatResult OnDeath()

@@ -84,8 +84,10 @@ namespace VGP133_Final_Karlsson_Vincent
                     case MainMenu.BossCastle:
                         break;
                     case MainMenu.Inventory:
+                        _player.ShowInventoryMenu();
                         break;
                     case MainMenu.Equipment:
+                        _player.ShowEquipmentMenu();
                         break;
                     case MainMenu.Save:
                         break;
@@ -98,6 +100,8 @@ namespace VGP133_Final_Karlsson_Vincent
                     default:
                         break;
                 }
+
+                Globals.Pause();
             }
         }
 
@@ -166,7 +170,7 @@ namespace VGP133_Final_Karlsson_Vincent
 
             Console.WriteLine($"Age: {age}");
             Console.WriteLine($"Base Stats: HP ({baseHP}), ATT ({baseAtt}), DEF ({baseDef})");
-            Console.WriteLine("\n-Character created!-\n");
+            Console.WriteLine("\n-Character created!-");
             Globals.Pause();
 
             return new Player(name, hairColor, gender, age, baseHP, baseAtt, baseDef);

@@ -4,19 +4,6 @@ namespace VGP133_Final_Karlsson_Vincent
 {
     public class CombatManager
     {
-        //private event OnDeath? OnDeathEvent; // UNUSED CURRENTLY, INCORRECT THOUGHT PROCESS
-
-        public CombatManager()
-        {
-            //foreach (Unit unit in units)
-            //{
-            //    OnDeathEvent += unit.OnDeath; // UNUSED CURRENTLY, INCORRECT THOUGHT PROCESS
-            //}
-        }
-
-        // Takes list of units, correctly distributes based on type
-        // simulates battle
-
         public CombatResult Combat(List<Unit> units) // Returns true if player exited combat safely, to determine exit sequence in previous 'scenes'
         {
             Random random = new Random();
@@ -68,7 +55,5 @@ namespace VGP133_Final_Karlsson_Vincent
 
             return CombatResult.PlayerVictory;
         }
-
-        //public delegate void OnDeath();
     }
 }

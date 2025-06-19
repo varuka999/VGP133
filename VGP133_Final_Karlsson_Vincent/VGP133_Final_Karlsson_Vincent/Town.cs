@@ -11,8 +11,8 @@
             switch ((TownMenu)menuInput)
             {
                 case TownMenu.Inn:
-                    Console.WriteLine("Visited the Inn and healed to full!");
                     player.AdjustCurrentHP(player.MaxHP);
+                    Console.WriteLine("Visited the Inn and healed to full!");
                     break;
                 case TownMenu.Consumable:
                     Shop consumableShopInstance = new Shop();
@@ -23,12 +23,11 @@
                     equipmentShopInstance.ShopMenu(player, TownMenu.Equipment);
                     break;
                 case TownMenu.Character:
+                    player.DisplayStats();
                     break;
                 default:
                     break;
             }
-
-            Globals.Pause();
         }
 
         public void RestAtInn(ref Player player)

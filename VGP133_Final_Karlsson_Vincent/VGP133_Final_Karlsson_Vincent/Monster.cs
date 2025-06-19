@@ -20,9 +20,9 @@ namespace VGP133_Final_Karlsson_Vincent
 
         public override void AttackTarget(Unit target)
         {
-            Random rnd = new Random();
+            Random random = new Random();
 
-            if (rnd.NextDouble() <= 0.3)
+            if (random.NextDouble() <= 0.3)
             {
                 UseSpecial(target);
             }

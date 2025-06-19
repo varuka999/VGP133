@@ -70,7 +70,6 @@ namespace VGP133_Final_Karlsson_Vincent
                 }
                 else
                 {
-                    Globals.PlayerMenuBar(player);
                     player.AddGold(-selectedItem.Cost);
                     Console.WriteLine($"Bought {selectedItem.Name} for {selectedItem.Cost}g!");
                     Globals.Pause();
