@@ -36,7 +36,7 @@ namespace VGP133_Final_Karlsson_Vincent
             Defense = defense;
         }
 
-        public void AddConsumableToInventory(Consumable item)
+        public void AddItemToInventory(Item item)
         {
             _inventory.Add(item);
         }
@@ -53,7 +53,7 @@ namespace VGP133_Final_Karlsson_Vincent
             return newValue;
         }
 
-        public void AdjustCurrentHP(int amount) // The only method to add to CurrentHP. Can also subtract if given a negative number
+        public void AdjustCurrentHP(int amount) // The only method to modify CurrentHP. Will subtract if given a negative number
         {
             _currentHP = Math.Clamp(_currentHP + amount, 0, MaxHP); // CurrentHP can't go below 0
         }

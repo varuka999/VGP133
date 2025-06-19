@@ -46,42 +46,19 @@
         //    }
         //}
 
-        public bool UseConsumable(string name)
-        {
-            foreach (Consumable c in _inventory)
-            {
-                if (c.Name == name)
-                {
-                    c.Consume();
-                    _inventory.Remove(c);
-                    return true;
-                }
-            }
-
-            return false;
-
-            //if(_inventory.Find(n => n.Name == name))
-            //{
-
-            //}
-
-            //if (consumable != null) 
-            //{
-            //    if (_inventory.Contains(consumable) == true)
-            //    {
-            //        consumable.Consume();
-            //        _inventory.Remove(consumable);
-            //    }
-            //}
-        }
-
-        //public void TakeRefUnitDamage(ref Unit unit)
+        //public bool UseConsumable(string name)
         //{
-        //    int damage = unit.Attack - Defense;
-        //    damage = Math.Max(damage, 1); // Ensures damage is at least 1
+        //    foreach (Consumable c in _inventory)
+        //    {
+        //        if (c.Name == name)
+        //        {
+        //            c.Consume();
+        //            _inventory.Remove(c);
+        //            return true;
+        //        }
+        //    }
 
-        //    Console.WriteLine($"{unit.Name} is attacking {Name} for {damage} damage ({Defense} blocked)!");
-        //    CurrentHP -= damage;
+        //    return false;
         //}
 
         public override bool OnDeath()

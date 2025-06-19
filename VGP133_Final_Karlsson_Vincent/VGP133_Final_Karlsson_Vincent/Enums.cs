@@ -12,7 +12,6 @@
         Save,
         Load,
         Exit,
-        Count,
     }
 
     public enum TownMenu
@@ -22,7 +21,6 @@
         Consumable,
         Equipment,
         Character,
-        Count,
     }
 
     public enum InventoryMenu
@@ -31,7 +29,6 @@
         SortName,
         SortQuantity,
         SortType,
-        Count,
     }
 
     public enum EquipmentMenu
@@ -39,7 +36,6 @@
         Null = 0,
         ChangeWeapon,
         ChangeArmor,
-        Count,
     }
 
     public enum CombatMenu
@@ -48,7 +44,6 @@
         Attack,
         UseItem,
         Flee,
-        Count,
     }
 
     public enum UnitType

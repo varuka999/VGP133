@@ -1,4 +1,6 @@
-﻿namespace VGP133_Final_Karlsson_Vincent
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace VGP133_Final_Karlsson_Vincent
 {
     public static class Globals
     {
@@ -12,15 +14,76 @@
             }
         }
 
-        public static bool ValidateIntInput(ref int input, int maxRangeExclusive)
+        public static bool ValidateIntInput(ref int input, int minInclusive, int maxRangeExclusive)
         {
-            if (input <= 0 || input >= maxRangeExclusive)
+            if (input < minInclusive || input >= maxRangeExclusive)
             {
                 input = 0;
                 return false;
             }
 
             return true;
+        }
+
+        public static void Pause()
+        {
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
+        public static void ClearConsoleLinesBasedOnError(ref bool error)
+        {
+            if (error == false)
+            {
+                error = true;
+                ClearConsoleLines(1);
+            }
+            else
+            {
+                ClearConsoleLines(2);
+            }
+        }
+
+        public static void PlayerMenuBar(Player player)
+        {
+            string playerMenuBar = $"--| {player.Name} | HP: {player.CurrentHP}/{player.MaxHP} | Gold: {player.Gold} |--";
+            Console.WriteLine(playerMenuBar);
+            for (int i = 0; i < playerMenuBar.Length; ++i)
+            {
+                Console.Write("-");
+            }
+            Console.WriteLine();
+        }
+
+        public static void PrintMenu<T>() where T : Enum
+        {
+            var enumValues = Enum.GetValues(typeof(T)).Cast<T>().ToList();
+
+            for (int i = 1; i < enumValues.Count; i++)
+            {
+                Console.WriteLine($"{i} - {enumValues[i]}");
+            }
+        }
+
+        public static int GetMenuChoice<T>() where T : Enum
+        {
+            int input = 0;
+            int menuCount = Enum.GetValues(typeof(T)).Length;
+
+            while (input == 0)
+            {
+                while (Int32.TryParse(Console.ReadLine(), out input) == false)
+                {
+                    ClearConsoleLines(1);
+                }
+
+                if (ValidateIntInput(ref input, 1, menuCount) == false)
+                {
+                    ClearConsoleLines(1);
+                }
+            }
+
+            return input;
         }
     }
 }

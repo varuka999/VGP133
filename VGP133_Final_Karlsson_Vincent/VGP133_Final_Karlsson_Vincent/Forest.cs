@@ -39,14 +39,15 @@
             if (combatInstance.Combat(units))
             {
                 // Continue exploring forest prompt
-                Console.WriteLine("Continue exploring the forest?");
+                 Console.WriteLine("Continue exploring the forest?");
             }
             else
             {
                 // Return to overworld
                 Console.WriteLine("Returning to overworld..");
             }
-            Console.ReadKey();
+
+            Globals.Pause();
         }
     }
 }

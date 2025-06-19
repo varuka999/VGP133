@@ -34,8 +34,8 @@ namespace VGP133_Final_Karlsson_Vincent
 
         private void UseSpecial(Unit unit)
         {
-
-        }
+            Console.WriteLine("Used Special Attack!")
+;        }
 
         //public override void TakeUnitDamage(Unit unit)
         //{

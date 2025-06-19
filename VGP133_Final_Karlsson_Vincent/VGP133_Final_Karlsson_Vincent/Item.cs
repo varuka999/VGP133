@@ -6,14 +6,14 @@
         protected string _description = "";
         protected int _cost;
 
-        public string Name { get => _name; protected set => _name = value; }
-        public string Description { get => _description; protected set => _description = value; }
+        public string Name { get => _name; }
+        public string Description { get => _description; }
         public int Cost { get => _cost; protected set => _cost = Math.Max(value, 1); }
 
-        public Item(string name, string description, int cost)
+        public Item(string name, int cost)
         {
-            Name = name;
-            Description = description;
+            _name = name;
+            _description = "";
             _cost = cost;
         }
 

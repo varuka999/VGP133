@@ -7,7 +7,7 @@
         public int AttBonus { get; private set; }
         public int DefBonus { get; private set; }
 
-        public Equipment(string name, int hpBonus, int attBonus, int defBonus, int cost) : base(name, "", cost)
+        public Equipment(string name, int hpBonus, int attBonus, int defBonus, int cost) : base(name, cost)
         {
             HPBonus = hpBonus;
             AttBonus = attBonus;

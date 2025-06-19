@@ -4,51 +4,36 @@
     {
         public void TownScene(Player player)
         {
-            int menuInput = 0;
-
             Console.Clear();
-            for (int i = 1; i < (int)TownMenu.Count; i++)
-            {
-                Console.WriteLine($"{i} - {(TownMenu?)Enum.GetValues(typeof(TownMenu)).GetValue(i)}");
-            }
-            //Console.WriteLine($"1 - {(TownMenu)Enum.GetValues(typeof(TownMenu)).GetValue(1)}\n2 - Consumable\n3 - Mountains\n4 - Boss Castle\nGo To:");
+            Globals.PrintMenu<TownMenu>();
+            int menuInput = Globals.GetMenuChoice<TownMenu>();
 
-            while (menuInput == 0)
+            switch ((TownMenu)menuInput)
             {
-                while (Int32.TryParse(Console.ReadLine(), out menuInput) == false)
-                {
-                    Globals.ClearConsoleLines(1);
-                }
-
-                if (Globals.ValidateIntInput(ref menuInput, (int)MainMenu.Count) == false)
-                {
-                    Globals.ClearConsoleLines(1);
-                }
-            }
-
-            switch (menuInput)
-            {
-                case (int)TownMenu.Inn:
+                case TownMenu.Inn:
+                    Console.WriteLine("Visited the Inn and healed to full!");
+                    player.AdjustCurrentHP(player.MaxHP);
                     break;
-                case (int)TownMenu.Consumable:
-                    Shop consumableShopInstance = new Shop(player);
+                case TownMenu.Consumable:
+                    Shop consumableShopInstance = new Shop();
                     consumableShopInstance.ShopMenu(player, TownMenu.Consumable);
                     break;
-                case (int)TownMenu.Equipment:
-                    Shop equipmentShopInstance = new Shop(player);
+                case TownMenu.Equipment:
+                    Shop equipmentShopInstance = new Shop();
                     equipmentShopInstance.ShopMenu(player, TownMenu.Equipment);
                     break;
-                case (int)TownMenu.Character:
+                case TownMenu.Character:
                     break;
                 default:
                     break;
             }
+
+            Globals.Pause();
         }
 
         public void RestAtInn(ref Player player)
         {
 
         }
-
     }
 }
