@@ -8,10 +8,10 @@
         protected int _age;
         protected int _gold = 0;
 
-        public string HairColor { get => _hairColor; protected set => _hairColor = value; }
-        public char Gender { get => _gender; protected set => _gender = value; }
-        public int Age { get => _age; protected set => _age = value >= 18 ? value : 18; } // Age can't be set less than 18
-        public int Gold { get => _gold; }
+        public string HairColor { get => _hairColor; set => _hairColor = value; }
+        public char Gender { get => _gender; set => _gender = value; }
+        public int Age { get => _age;  set => _age = value >= 18 ? value : 18; } // Age can't be set less than 18
+        public int Gold { get => _gold; set => _gold = value; }
 
         public Player()
             : base("", 0, 0, 0)
@@ -90,16 +90,6 @@
                 var groupedList = filteredForConsumables.ToList(); // Converts to ienumerable to list so I can index easier
 
                 return UseConsumable(groupedList[input - 1].Name);
-
-                //i = 0;
-                //foreach (var item in filteredForConsumables)
-                //{
-                //    ++i;
-                //    if (i == input)
-                //    {
-                //        return UseConsumable(item.Name);
-                //    }
-                //}
             }
         }
 
@@ -292,5 +282,4 @@
             return base.OnDeath();
         }
     }
-
 }

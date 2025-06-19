@@ -4,22 +4,23 @@ namespace VGP133_Final_Karlsson_Vincent
 {
     [Serializable]
     [XmlInclude(typeof(Consumable))]
+    [XmlInclude(typeof(HealthPotion))]
+    [XmlInclude(typeof(Equipment))]
     [XmlInclude(typeof(Armor))]
     [XmlInclude(typeof(Weapon))]
     public abstract class Item
     {
         protected string _name = "";
-        protected string _description = "";
         protected int _cost;
 
-        public string Name { get => _name; }
-        public string Description { get => _description; }
-        public int Cost { get => _cost; protected set => _cost = Math.Max(value, 1); }
+        public string Name { get => _name; set => _name = value; }
+        public int Cost { get => _cost; set => _cost = Math.Max(value, 1); }
+
+        public Item() { }
 
         public Item(string name, int cost)
         {
             _name = name;
-            _description = "";
             _cost = cost;
         }
 

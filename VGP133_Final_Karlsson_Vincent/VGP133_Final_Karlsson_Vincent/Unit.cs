@@ -3,6 +3,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace VGP133_Final_Karlsson_Vincent
 {
+    [Serializable] // Forced to give everything a public get/setter for the xml save to work smoothly. Alternative was creating a duplicate 'serializable' version of all the classes that needed to be save.. at least as far as I understand it.
     public class Unit
     {
         protected string _name;
@@ -18,22 +19,23 @@ namespace VGP133_Final_Karlsson_Vincent
 
         protected List<Item> _inventory = new List<Item>();
 
-        public string Name { get => _name; }
-        public UnitType Type { get => _unitType; protected set => _unitType = value; }
-        public int MaxHP { get => _maxHP; protected set => _maxHP = UpdateMaxHP(value); }
-        public int CurrentHP { get => _currentHP; }
-        public int Attack { get => _attack; protected set => _attack = value; }
-        public int Defense { get => _defense; protected set => _defense = value; }
-        public Weapon? EquippedWeapon { get => _equippedWeapon; }
-        public Armor? EquippedArmor { get => _equippedArmor; }
+        public string Name { get => _name; set => _name = value; }
+        public UnitType Type { get => _unitType; set => _unitType = value; }
+        public int MaxHP { get => _maxHP;  set => _maxHP = UpdateMaxHP(value); }
+        public int CurrentHP { get => _currentHP; set => _currentHP = value; }
+        public int Attack { get => _attack; set => _attack = value; }
+        public int Defense { get => _defense; set => _defense = value; }
+        public Weapon? EquippedWeapon { get => _equippedWeapon; set => _equippedWeapon = value; }
+        public Armor? EquippedArmor { get => _equippedArmor; set => _equippedArmor = value; }
+        public List<Item> Inventory { get => _inventory; set => _inventory = value; }
 
         public Unit(string name, int maxHP, int attack, int defense)
         {
             _name = name;
             _maxHP = Math.Max(maxHP, 1);
             _currentHP = MaxHP;
-            Attack = attack;
-            Defense = defense;
+            _attack = attack;
+            _defense = defense;
         }
 
         public void AddItemToInventory(Item item)

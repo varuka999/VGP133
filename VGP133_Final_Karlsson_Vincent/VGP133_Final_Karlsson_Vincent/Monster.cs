@@ -6,6 +6,8 @@ namespace VGP133_Final_Karlsson_Vincent
     public class Monster : Unit
     {
         protected int _goldDrop;
+
+        public int GoldDrop { get => _goldDrop; set => _goldDrop = value; }
         //protected List<Item> _lootTable = new List<Item>();
 
         public event Death1 DroppedGold;

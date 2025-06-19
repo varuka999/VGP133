@@ -14,18 +14,21 @@ namespace VGP133_Final_Karlsson_Vincent
 
             while (units[0].CurrentHP > 0 && units.Count > 1)
             {
+                UI.DisplayCombatScreen(units[0], units[1]);
+
                 if (units[attackingIndex] is Player player) // If is Player class, declare 'player' as casted type
                 {
                     PlayerAction action = player.PlayerCombatActions();
+                    UI.DisplayCombatScreen(units[0], units[1]);
                     switch (action)
                     {
                         case PlayerAction.Attack:
-                            player.AttackTarget(units[defendingIndex]);
                             break;
                         case PlayerAction.UseItem:
                             if (player.UseItemCombatAction(player) == false)
                             {
-                                //Console.WriteLine("Failed to use item!");
+                                Console.WriteLine("Failed to use item!");
+                                Globals.Pause();
                                 continue;
                             }
                             break;
@@ -33,6 +36,7 @@ namespace VGP133_Final_Karlsson_Vincent
                             if (units[defendingIndex].Type == UnitType.Boss)
                             {
                                 Console.WriteLine("Unable to flee form boss!");
+                                Globals.Pause();
                                 continue;
                             }
                             else

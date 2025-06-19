@@ -4,10 +4,11 @@
     {
         //private event ConsumeDelegate OnHeal;
 
+        public HealthPotion() {}
         public HealthPotion(string name, int modifier, int cost) : base(name, modifier, cost)
         {
             //OnHeal += player.AdjustCurrentHP;
-            _description += $"Heals {_modifierAmount} health.";
+            //_description += $"Heals {_modifierAmount} health.";
         }
 
         public override bool Use(Unit user)

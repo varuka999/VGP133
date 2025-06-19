@@ -58,6 +58,11 @@ namespace VGP133_Final_Karlsson_Vincent
             //bool test = healthPotion1.Equals(healthPotion2);
         }
 
+        public void GameStart()
+        {
+
+        }
+
         public void Game()
         {
             bool gameRunning = true;
@@ -76,7 +81,7 @@ namespace VGP133_Final_Karlsson_Vincent
                         town.TownScene(_player);
                         break;
                     case MainMenu.Forest:
-                        Forest forest = new Forest(_player);
+                        Forest forest = new Forest();
                         forest.RunForest(_player);
                         break;
                     case MainMenu.Mountains:
@@ -90,8 +95,20 @@ namespace VGP133_Final_Karlsson_Vincent
                         _player.ShowEquipmentMenu();
                         break;
                     case MainMenu.Save:
+                        SaveManager.ShowSaveSlots();
+                        Console.Write("Select slot to save to (1–3): ");
+                        int saveSlot = Int32.Parse(Console.ReadLine()!);
+                        SaveManager.Save(_player, saveSlot);
                         break;
                     case MainMenu.Load:
+                        SaveManager.ShowSaveSlots();
+                        Console.Write("Select slot to load from (1–3): ");
+                        int loadSlot = Int32.Parse(Console.ReadLine()!);
+                        Player? loaded = SaveManager.Load(loadSlot);
+                        if (loaded != null)
+                        {
+                            _player = loaded;
+                        }
                         break;
                     case MainMenu.Exit:
                         Console.WriteLine("\n--| EXITING GAME |--\n");
