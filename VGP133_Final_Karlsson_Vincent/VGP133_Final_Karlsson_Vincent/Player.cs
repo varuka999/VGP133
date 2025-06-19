@@ -124,6 +124,11 @@
             UI.PrintMenu<SortType>();
             int menuInput = Globals.GetMenuChoice<SortType>();
 
+            if ((SortType)menuInput == SortType.Exit)
+            {
+                return;
+            }
+
             SortType sortOption = (SortType)menuInput;
             DisplaySortedGroupedInventory(sortOption);
         }

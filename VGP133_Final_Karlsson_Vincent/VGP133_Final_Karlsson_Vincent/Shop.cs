@@ -5,12 +5,9 @@ namespace VGP133_Final_Karlsson_Vincent
 {
     public class Shop()
     {
-        public List<Consumable> _consumableList = new List<Consumable>() { new HealthPotion("Basic Health Potion", 10, 5),
-                                                                           new HealthPotion("Advanced Health Potion", 25, 10),
-                                                                           new HealthPotion("Super Health Potion", 50, 20) };
+        public List<ItemData> _consumableList = new List<ItemData>() { ItemData.HealthPotion, ItemData.AdvancedPotion, ItemData.SuperPotion };
+        public List<ItemData> _equipmentList = new List<ItemData>() { ItemData.IronSword, ItemData.SteelSword, ItemData.LeatherArmor, ItemData.ToughArmor };
 
-        public List<Equipment> _equipmentList = new List<Equipment>() { new Weapon("Sword1", 0, 5, 0, 5), new Weapon("Sword2", 0, 10, 0, 10), new Weapon("Sword3", 0, 15, -5, 15),
-                                                                          new Armor("Armor1", 5, 0, 5, 5), new Armor("Armor2", 10, 0, 10, 10), new Armor("Armor3", 15, -10, 15, 15), };
         public void ShopMenu(Player player, TownMenu shopType)
         {
             int itemInput;
@@ -21,20 +18,20 @@ namespace VGP133_Final_Karlsson_Vincent
             {
                 foreach (var item in _consumableList)
                 {
-                    shopItems.Add(item);
+                    shopItems.Add(ItemDatabase.Create(item));
                 }
             }
             else if (shopType == TownMenu.Equipment)
             {
                 foreach (var item in _equipmentList)
                 {
-                    shopItems.Add(item);
+                    shopItems.Add(ItemDatabase.Create(item));
                 }
             }
 
             while (true)
             {
-                UI.RenderMenuHeader($"{shopType.ToString()} Shop");
+                UI.RenderMenuHeader($"{shopType} Shop");
                 UI.PlayerMenuBar(player);
 
                 for (int i = 0; i < shopItems.Count; i++)

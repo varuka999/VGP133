@@ -12,10 +12,13 @@ while (running)
     switch ((GameStart)menuInput)
     {
         case GameStart.NewGame:
-            gameManager.Initialize(true);
+            gameManager.Initialize(true, false);
+            break;
+        case GameStart.NewGameAdmin:
+            gameManager.Initialize(true, true);
             break;
         case GameStart.Continue:
-            gameManager.Initialize(false);
+            gameManager.Initialize(false, false);
             break;
         case GameStart.Exit:
             Console.WriteLine("\n--| EXITING GAME |--");

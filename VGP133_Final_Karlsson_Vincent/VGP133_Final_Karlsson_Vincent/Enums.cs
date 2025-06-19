@@ -6,6 +6,7 @@ namespace VGP133_Final_Karlsson_Vincent
     {
         Null = 0,
         NewGame,
+        NewGameAdmin,
         Continue,
         Exit,
     }
@@ -14,14 +15,23 @@ namespace VGP133_Final_Karlsson_Vincent
     {
         Null = 0,
         Town,
-        Forest,
-        Mountains,
         Inventory,
         Equipment,
+        Forest,
+        Mountains,
         BossCastle,
         Save,
         Load,
         Delete,
+        Exit,
+    }
+
+    public enum ExploreMenu
+    {
+        Null = 0,
+        Forest,
+        Mountains,
+        BossCastle,
         Exit,
     }
 
@@ -32,6 +42,7 @@ namespace VGP133_Final_Karlsson_Vincent
         Consumable,
         Equipment,
         Character,
+        Exit,
     }
 
     public enum InventoryMenu
@@ -40,6 +51,7 @@ namespace VGP133_Final_Karlsson_Vincent
         SortName,
         SortQuantity,
         SortType,
+        Exit,
     }
 
     public enum EquipmentMenu
@@ -87,6 +99,7 @@ namespace VGP133_Final_Karlsson_Vincent
         Name,
         TypeName,
         Quantity,
+        Exit,
     }
 
     public enum PlayerAction

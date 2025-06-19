@@ -2,7 +2,7 @@
 {
     internal class ShaleGolem : Monster
     {
-        public ShaleGolem(Player player, bool isBasic) : base(player, "Shale Golem", false, isBasic ? 65 : 85, isBasic ? 5 : 10, isBasic ? 10 : 15, isBasic ? 15 : 35)
+        public ShaleGolem(Player player, bool isBasic) : base(player, "Shale Golem", false, isBasic ? 65 : 85, isBasic ? 5 : 10, isBasic ? 5 : 10, isBasic ? 15 : 35)
         {
 
         }
@@ -10,7 +10,7 @@
         protected override void UseSpecial(Unit target)
         {
             Random random = new Random();
-            int defenseBonus = random.Next(2, 6);
+            int defenseBonus = random.Next(1, 4);
             Defense += defenseBonus;
             int damage = Defense + (EquippedArmor?.DefBonus ?? 0);
             damage = Math.Max(damage, 1);

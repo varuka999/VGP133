@@ -4,7 +4,7 @@ namespace VGP133_Final_Karlsson_Vincent
 {
     internal class Boss : Monster
     {
-        public Boss(Player player) : base(player, "Progenitus, Monster Lord", true, 200, 30, 20, 1000)
+        public Boss(Player player) : base(player, "Progenitus, Monster Lord", true, 200, 25, 15, 1000)
         {
             
         }
@@ -29,8 +29,8 @@ namespace VGP133_Final_Karlsson_Vincent
             int rand = random.Next(0, 4);
             if (rand == 0)
             {
-                Console.WriteLine($"{Name} buffed itself!");
-                Buff(10);
+                Console.WriteLine($"{Name} buffed its attack and defense!");
+                Buff(4);
             }
             else if (rand == 1)
             {
@@ -46,7 +46,7 @@ namespace VGP133_Final_Karlsson_Vincent
                 else
                 {
                     Console.WriteLine($"{Name} missed it's attack!\n{Name}'s buffed itself in rage!");
-                    Buff(5);
+                    Buff(2);
                 }
             }
             else if (rand == 2)

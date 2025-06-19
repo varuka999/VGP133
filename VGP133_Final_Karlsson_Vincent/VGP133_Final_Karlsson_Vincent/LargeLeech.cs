@@ -2,7 +2,7 @@
 {
     internal class LargeLeech : Monster
     {
-        public LargeLeech(Player player, bool isBasic) : base(player, "Large Leech", false, isBasic ? 25 : 40, isBasic ? 5 : 8, isBasic ? 2 : 4, isBasic ? 10 : 20)
+        public LargeLeech(Player player, bool isBasic) : base(player, "Large Leech", false, isBasic ? 25 : 40, isBasic ? 3 : 6, isBasic ? 2 : 4, isBasic ? 10 : 20)
         {
 
         }

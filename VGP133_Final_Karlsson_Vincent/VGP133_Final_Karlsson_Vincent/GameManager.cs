@@ -6,11 +6,11 @@
 
         public Player? Player { get => _player; }
 
-        public void Initialize(bool createCharacter)
+        public void Initialize(bool createCharacter, bool adminMode)
         {
             if (createCharacter == true)
             {
-                _player = CreateCharacter(false);
+                _player = CreateCharacter(adminMode);
             }
             else
             {

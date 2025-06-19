@@ -26,14 +26,11 @@
                 case TownMenu.Character:
                     player.DisplayStats();
                     break;
+                case TownMenu.Exit:
+                    return;
                 default:
                     break;
             }
-        }
-
-        public void RestAtInn(ref Player player)
-        {
-
         }
     }
 }
