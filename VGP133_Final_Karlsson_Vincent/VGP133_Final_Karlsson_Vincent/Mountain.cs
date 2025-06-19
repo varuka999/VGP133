@@ -46,7 +46,7 @@
                         break;
                     case CombatResult.PlayerFlee:
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("\nYou fled the battle..");
+                        Console.WriteLine("\nYou fled the battle.. ");
                         Console.ResetColor();
                         break;
                     case CombatResult.PlayerDefeat:
@@ -59,3 +59,5 @@
         }
     }
 }
+
+// Arthur was here (very nice game i enjoy) :)
