@@ -195,7 +195,7 @@
                     Globals.ClearConsoleLines(1);
                 }
 
-                if (Globals.ValidateIntInput(ref slotInput, 0, 3) == false)
+                if (Globals.ValidateIntInput(ref slotInput, 0, 4) == false)
                 {
                     Globals.ClearConsoleLines(1);
                     continue;

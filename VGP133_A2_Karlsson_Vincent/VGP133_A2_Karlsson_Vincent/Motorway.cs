@@ -84,8 +84,11 @@ namespace VGP133_A2_Karlsson_Vincent
             {
                 return "Toll Road";
             }
+            else
+            {
+                return "Toll Free";
+            }
 
-            return "Toll Free";
         }
     }
 }
